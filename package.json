@@ -1,0 +1,26 @@
+{
+  "name": "agentclinic",
+  "version": "1.0.0",
+  "description": "This is testing demo for SDD(spec-driven-development) with AI agentic coding assistant.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrpyaesone/agentclinic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mrpyaesone/agentclinic/issues"
+  },
+  "homepage": "https://github.com/mrpyaesone/agentclinic#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
+  }
+}
