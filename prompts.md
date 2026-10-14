@@ -96,3 +96,11 @@ Important: You *must* use your AskUserQuestion/request_user_input tool, grouped 
 ## Prompt 18
 
 Update the spec to use PicoCSS
+
+## Prompt 19
+
+Implement the feature.
+
+## Prompt 20
+
+Use extracted props definitions with a TypeScript type instead of inline and re-run tests.
