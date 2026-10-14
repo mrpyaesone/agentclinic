@@ -7,8 +7,12 @@
     "test": "vitest run",
     "dev": "tsx watch --include src/styles.css src/index.ts",
     "typecheck": "tsc --project tsconfig.typecheck.json",
-    "build": "tsc && node -e \"require('node:fs').copyFileSync('src/styles.css', 'dist/styles.css')\"",
-    "start": "node dist/index.js"
+    "build": "tsc && node scripts/copy-assets.mjs",
+    "start": "node dist/index.js",
+    "db:migrate": "tsx src/db-cli.ts migrate",
+    "db:seed": "tsx src/db-cli.ts seed",
+    "db:migrate:production": "node dist/db-cli.js migrate",
+    "db:seed:production": "node dist/db-cli.js seed"
   },
   "repository": {
     "type": "git",
@@ -23,6 +27,7 @@
   },
   "homepage": "https://github.com/mrpyaesone/agentclinic#readme",
   "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^24.19.2",
     "tsx": "^4.23.15",
     "typescript": "~5.9.3",
@@ -33,6 +38,11 @@
   },
   "dependencies": {
     "@hono/node-server": "^2.1.5",
+    "@picocss/pico": "^2.1.1",
+    "better-sqlite3": "^13.0.3",
     "hono": "^4.13.13"
+  },
+  "allowScripts": {
+    "better-sqlite3@13.0.3": true
   }
 }

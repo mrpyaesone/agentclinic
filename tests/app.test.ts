@@ -1,6 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import app from '../src/app.js';
+import { createApp } from '../src/app.js';
+import { migrate, openDatabase } from '../src/database.js';
+import { afterAll } from 'vitest';
+const db = openDatabase(':memory:');
+migrate(db);
+const app = createApp(db);
+afterAll(() => db.close());
 
 describe('GET /', () => {
   it('serves a complete HTML document with the required metadata', async () => {
@@ -8,7 +14,7 @@ describe('GET /', () => {
     expect(response.status).toBe(200);
     expect(response.headers.get('content-type')).toMatch(/^text\/html\b/);
     const document = await response.text();
-    expect(document).toMatch(/^<!DOCTYPE html><html lang="en">/);
+    expect(document).toMatch(/^<!DOCTYPE html><html lang="en" data-theme="light">/);
     expect(document).toContain('<meta charset="UTF-8"');
     expect(document).toContain('<meta name="viewport" content="width=device-width, initial-scale=1"');
     expect(document).toContain('<title>AgentClinic</title>');
@@ -27,8 +33,12 @@ describe('GET /', () => {
     expect(main).toMatch(/fictional clinic[\s\S]*AI agents[\s\S]*relief[\s\S]*humans/);
     expect(document).not.toMatch(/<script\b/i);
     expect(document.match(/href="([^"]+)"/g)).toEqual([
+      'href="/pico.css"',
       'href="/styles.css"',
       'href="/"',
+      'href="/"',
+      'href="/agents"',
+      'href="/ailments"',
     ]);
   });
 });
@@ -47,5 +57,5 @@ describe('GET /styles.css', () => {
 });
 
 it('returns 404 for an unimplemented page', async () => {
-  expect((await app.request('/agents')).status).toBe(404);
+  expect((await app.request('/therapies')).status).toBe(404);
 });
