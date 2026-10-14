@@ -104,3 +104,11 @@ Implement the feature.
 ## Prompt 20
 
 Use extracted props definitions with a TypeScript type instead of inline and re-run tests.
+
+## Prompt 21
+
+Do a deep review: Spawn multiple subagents to go through all the changes on this branch from three different perspectives and see if anything doesn't make sense, could be better, etc.
+
+## Prompt 22
+
+switch to main branch and merge this branch, then delete it.
