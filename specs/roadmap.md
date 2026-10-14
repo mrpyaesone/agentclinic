@@ -4,12 +4,20 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 
 ---
 
-## Phase 1 — Hello Hono
-- Install and configure Hono with `tsx` dev server
-- Single `/` route returning "AgentClinic is open for business"
-- Confirm TypeScript types work end-to-end
+## Phase 1 — Hello Hono (complete)
+
+- [x] Install and configure Hono with `tsx` dev server
+- [x] Single `/` page route returning "AgentClinic is open for business"
+- [x] Confirm TypeScript types work end-to-end
+
+Completed on 2026-10-14, including the requested shared header/main/footer
+layout and linked CSS extension. See the [implementation verification](2026-10-14-hello-hono/verification.md).
 
 ## Phase 2 — Base Layout
+
+The shared header/main/footer layout and basic CSS were brought forward into
+Phase 1. Navigation and layout integration for future pages remain in this phase.
+
 - Server-side JSX layout component (header, nav, main, footer)
 - Basic CSS (custom properties, reset, typography)
 - All routes render inside the shared layout
