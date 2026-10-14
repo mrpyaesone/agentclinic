@@ -1,81 +1,21 @@
-:root {
-  color-scheme: light;
-  --background: #f5f8f6;
-  --surface: #ffffff;
-  --text: #23372f;
-  --muted: #50675b;
-  --accent: #236747;
-  --border: #d7e4db;
-  font-family: system-ui, sans-serif;
-  color: var(--text);
-  background: var(--background);
-  line-height: 1.6;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-
-.container {
-  width: min(100% - 2rem, 64rem);
-  min-width: 0;
-  margin-inline: auto;
-  overflow-wrap: anywhere;
-}
-
-.site-header {
-  padding-block: 1.5rem;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  color: var(--accent);
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.brand:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 4px;
-}
-
-.site-header p,
-.site-footer p {
-  margin: 0.25rem 0 0;
-  color: var(--muted);
-}
-
-.site-main {
-  flex: 1;
-  padding-block: clamp(2rem, 6vw, 5rem);
-}
-
-h1 {
-  margin: 0 0 1rem;
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1.2;
-  overflow-wrap: break-word;
-}
-
-.site-main p {
-  max-width: 65ch;
-}
-
-.site-footer {
-  padding-block: 1rem;
-  border-top: 1px solid var(--border);
-}
+/* Pico supplies the reset, typography, and base components. */
+:root { --pico-primary: #236747; --pico-primary-hover: #17482f; --pico-primary-focus: rgba(35, 103, 71, .3); }
+body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+.container { min-width: 0; overflow-wrap: anywhere; }
+.site-header { border-bottom: 1px solid var(--pico-muted-border-color); }
+.brand { font-size: 1.5rem; font-weight: 700; text-decoration: none; }
+.site-header p, .site-footer p { color: var(--pico-muted-color); margin-bottom: 0; }
+.site-main { flex: 1; padding-block: clamp(2rem, 6vw, 4rem); }
+.site-footer { border-top: 1px solid var(--pico-muted-border-color); }
+h1 { font-size: clamp(1.75rem, 5vw, 3rem); }
+a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; overflow-wrap: anywhere; max-width: 100%; }
+a:focus-visible { outline: 3px solid var(--pico-primary); outline-offset: 3px; }
+nav, nav ul { flex-wrap: wrap; min-width: 0; }
+nav ul { margin-inline: 0; gap: .5rem; }
+nav li { flex: 0 0 auto; padding-inline: 0; }
+nav a { white-space: nowrap; margin-inline: 0; }
+nav a[aria-current="page"] { font-weight: 700; text-decoration: underline; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1rem; }
+.cards article { min-width: 0; margin: 0; }
+.cards h2 { font-size: 1.35rem; }
+dt { font-weight: 700; } dd { margin-inline-start: 0; margin-bottom: 1rem; }

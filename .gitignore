@@ -148,3 +148,10 @@ vite.config.ts.timestamp-*
 # Turbo Repo
 .turbo
 .DS_Store
+
+# Local clinic databases
+data/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
