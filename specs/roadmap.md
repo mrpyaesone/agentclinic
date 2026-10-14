@@ -1,5 +1,8 @@
-# AgentClinic constitution: implementation roadmap
+# Roadmap
 
+Phases are intentionally small — each one is a shippable slice of work, independently reviewable and testable.
+
+---
 
 ## Phase 1 — Hello Hono
 - Install and configure Hono with `tsx` dev server
@@ -50,7 +53,6 @@
 - Input sanitization on all forms
 - Basic logging middleware
 
+---
 
-## Later work
-
-Evaluate rescheduling, staff catalog editing, reminders, search, external calendars, and autonomous agent access only after the first release is validated. These are possibilities rather than committed phases.
+Later phases (not yet planned): auth, email notifications, therapist profiles, reporting.

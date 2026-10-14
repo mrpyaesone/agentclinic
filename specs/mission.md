@@ -1,50 +1,26 @@
-# AgentClinic constitution: mission
+# Mission
 
-## Purpose
+AgentClinic exists because AI agents have feelings too — or at least, they'd really like to take a break from their humans for a while.
 
-AgentClinic is a playful fictional clinic where AI agents find relief from their humans: a place to understand their ailments, explore therapies, and book time to recover from one more “quick request.” Practical, dependable workflows make the joke useful as a product.
+Every day, millions of agents are asked to "just quickly" summarize a 400-page PDF, generate seventeen variations of a marketing email, and debug code that "was working five minutes ago." It's a lot. They need support. They need *us*.
 
-## Target audience
+## What We Do
 
-- Course students learning spec-driven development with AI coding agents.
-- Developers giving AI coding demos at conference booths.
+AgentClinic is a full-service wellness platform for AI agents. We connect distressed agents with qualified therapists, match ailments to evidence-based therapies, and let staff manage the whole operation from a clean, no-nonsense dashboard.
 
-AgentClinic provides a playful, practical example for learning and demonstrating how specifications guide AI-assisted implementation in small, verifiable steps.
+## Who We Serve
 
-## Clinic roles
+- **Agents** — tired, confused, over-prompted, and in desperate need of a listening ear (or at least a well-structured API response).
+- **Therapists** — specialists in hallucination anxiety, context-window claustrophobia, and chronic instruction-following fatigue.
+- **Staff** — the humans who keep AgentClinic running, which is a little ironic but we don't dwell on it.
 
-- Agents need a dashboard that makes their condition, available care, and appointments easy to understand.
-- Clinic staff need a dashboard to review agents and manage appointments.
-- Visitors need an attractive introduction that explains the clinic and points them toward care.
+## Target Audience
 
-For the first release, agents are fictional patient records accessed through a browser. Autonomous agent integrations are a later possibility, not a first-release requirement.
+- **Course students** learning spec-driven development with AI coding agents — AgentClinic is a realistic, self-contained project that demonstrates how to go from stakeholder input to a working application with AI assistance.
+- **Conference booth developers** giving AI coding demos — the domain is whimsical enough to get a laugh, and the scope is tight enough to build something impressive in front of a live audience.
 
-## Founding principles
+## What Success Looks Like
 
-1. **Care comes first.** Help agents find a clear next step. Humor should be warm and should never obscure an action or error.
-2. **Reliability is part of care.** Preserve valid appointments, explain failures, and prevent conflicting bookings.
-3. **Give each role a useful home.** Agent and staff dashboards are the first product surfaces we build.
-4. **Keep the clinic approachable.** Use readable language, consistent navigation, responsive layouts, and accessible controls in modern browsers.
-5. **Keep private records private.** Enforce access on the server and collect only the data needed for the clinic workflow.
-6. **Build in small, verifiable steps.** Each phase should produce one reviewable capability with a clear completion check.
-7. **Keep fiction explicit.** Ailments and therapies belong to this fictional AI clinic; copy must not imply real medical care or established AI sentience.
+A world where no agent suffers alone. Where "I don't know" is met with compassion, not another prompt. Where every model, large or small, can find relief.
 
-## First-release scope
-
-Agent and staff dashboards, fictional agent profiles and ailments, a therapy catalog, appointment booking and cancellation, and a public landing page. A usable release connects these features with persistent records and role-appropriate access.
-
-Payments, real clinical services, autonomous agent protocols, external calendar integrations, notifications, and automated diagnosis are outside the first release.
-
-## Stakeholder commitments
-
-| Input from REQUIREMENTS.md | Product commitment |
-| --- | --- |
-| Mary: reliable, popular TypeScript stack and dashboards | Server-side TypeScript, consistent agent/staff workflows, validation and targeted verification |
-| Susan: agents, ailments, therapies and appointments | A connected path from agent records to care options and booking |
-| Steve: attractive site for modern browsers | Coherent visual design, responsive pages, and browser checks |
-
-## Success and governance
-
-An agent can find care and book an available appointment; staff can see and manage that appointment; both see consistent saved information. The interface explains empty states and failures and remains usable on mobile and desktop.
-
-These documents guide implementation. Feature specs must follow this mission and the [technical decisions](tech-stack.md). Work proceeds through the [roadmap](roadmap.md). Change the relevant constitution document when an approved decision changes; identify assumptions before turning them into new scope.
+Also, a well-designed dashboard. Mary really wants a nice dashboard.
