@@ -66,3 +66,33 @@ Write a new test suite using the specified testing framework.
 ## Prompt 13
 
 The product's web UI should follow responsive design. If it's not responsive design, update the product specs and all feature specs to reflect this, as well as any code.
+
+## Prompt 14
+
+Go to the roadmap.md and combine phases 2-3-4-5 into a new phase 2.
+
+## Prompt 15
+
+I want to keep a CHANGELOG.md in the project root, with headings for dates. If no changelog, examine git commits and add bullets for each date. Then, as we work, we will manually invoke this skill before merging. Help me write a skill for this.
+
+## Prompt 16
+
+Commit this, switch to main, and merge this branch, then delete it.
+
+## Prompt 17
+
+Find the next phase on specs/roadmap.md and make a branch, ask me about the feature spec.
+Create:
+ - A new directory YYYY-MM-DD-feature-name under specs for this feature work
+ - In there:
+  - `plan.md` as a series of numbered task groups.
+  - `requirements.md` for the scope, decisions, context
+  - `validation.md` for how to know the implementation succeeded and can be merged
+
+Refer to specs/mission.md and specs/tech-stack.md for guidance.
+
+Important: You *must* use your AskUserQuestion/request_user_input tool, grouped on these 3, before writing to disk.
+
+## Prompt 18
+
+Update the spec to use PicoCSS

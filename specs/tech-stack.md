@@ -13,7 +13,20 @@ Follow the product's [responsive UI requirements](../REQUIREMENTS.md).
 | Runtime | Node.js | Stable, well-supported, vast ecosystem |
 | Server framework | **Hono** | Lightweight, TypeScript-first, fast, excellent DX; routes and middleware feel natural |
 | Templating | Hono JSX (server-side) | JSX without React overhead; components are just functions |
-| CSS | Plain CSS + CSS custom properties | No build step required; Steve gets a modern, attractive result |
+| CSS | Pico CSS v2 + plain CSS custom-property overrides | Semantic HTML styling with locally served CSS and no CSS compilation step |
+
+## Styling
+
+- Starting in Phase 2, use the standard Pico CSS v2 distribution from
+  `@picocss/pico`, with the selected version recorded in the lockfile. See the
+  [official documentation](https://picocss.com/docs).
+- Serve Pico locally at `/pico.css` before application overrides at `/styles.css`;
+  include both assets in production output. Avoid runtime CDN dependencies.
+- Use semantic HTML and Pico layout conventions, with a consistent light theme.
+  Keep custom CSS small and focused on branding and required responsive/accessibility
+  behavior. Pico supplies base reset, typography, and component styling.
+- No Sass, CSS bundler, or browser JavaScript is required. Phase 1’s plain CSS
+  remains historical; Phase 2 adopts Pico for the shared layout and every page.
 
 ## Responsive UI
 
