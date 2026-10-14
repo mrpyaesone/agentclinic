@@ -4,8 +4,9 @@
   "description": "This is testing demo for SDD(spec-driven-development) with AI agentic coding assistant.",
   "main": "dist/index.js",
   "scripts": {
+    "test": "vitest run",
     "dev": "tsx watch --include src/styles.css src/index.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --project tsconfig.typecheck.json",
     "build": "tsc && node -e \"require('node:fs').copyFileSync('src/styles.css', 'dist/styles.css')\"",
     "start": "node dist/index.js"
   },
@@ -24,7 +25,8 @@
   "devDependencies": {
     "@types/node": "^24.19.2",
     "tsx": "^4.23.15",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.4"
   },
   "engines": {
     "node": ">=24 <25"

@@ -4,7 +4,7 @@
 
 This feature implements the first phase of the [roadmap](../roadmap.md). The [mission](../mission.md) calls for a playful, self-contained project for course students learning spec-driven development and developers demonstrating AI coding at conference booths. A small, reproducible server is the first working increment.
 
-Follow the [tech stack](../tech-stack.md): Node.js, server-side TypeScript, Hono, `tsx` for development, and `tsc` for production builds. The current repository contains a package scaffold but no working server.
+Follow the [tech stack](../tech-stack.md): Node.js, server-side TypeScript, Hono, `tsx` for development, `tsc` for production builds, and Vitest for automated validation. This increment turns the original package scaffold into a working server.
 
 ## Scope and decisions
 
@@ -13,11 +13,14 @@ Follow the [tech stack](../tech-stack.md): Node.js, server-side TypeScript, Hono
 - Use Hono JSX in strictly checked `.tsx` source. The HTML document includes an English language declaration, UTF-8 encoding, viewport metadata, and an `AgentClinic` page title.
 - Include a semantic main region with one top-level heading whose text is exactly `AgentClinic is open for business`, plus a short, playful introduction explaining that this is a fictional clinic where AI agents get relief from their humans.
 - Compose a reusable `MainLayout` from separate `Header`, `Main`, and `Footer` subcomponents. Keep the page readable with responsive plain CSS, without client-side JavaScript or navigation to unimplemented features.
+- Follow the product's [responsive UI requirements](../../REQUIREMENTS.md): mobile-first fluid layout from 320 CSS pixels upward, long-text wrapping, readable reflow, zoom support, and touch/keyboard usability.
 - Create a CSS file, import its contents through a Node-compatible module, link it from the layout, and include the asset in production build output.
 - Use Hono and its Node.js server adapter. Keep the application definition separate from the entry point that opens the listening socket.
 - Use port 3000 by default; allow a valid `PORT` environment variable to override it. Invalid port configuration must fail clearly at startup.
-- Provide npm scripts for development (`dev`), production compilation (`build`), production execution (`start`), and static checking (`typecheck`).
-- Development runs through `tsx` with file watching. Production runs the JavaScript emitted by `tsc` with Node.js. Development execution alone does not enforce types; `typecheck` is a required merge check.
+- Provide npm scripts for development (`dev`), production compilation (`build`), production execution (`start`), static checking (`typecheck`), and automated validation (`test`, running `vitest run`).
+- Use Vitest in the Node environment with Hono server-side JSX. Test route responses through the application request API without opening listening sockets, reusable layout content and escaping, valid and invalid port configuration, and clear startup failure for an invalid port.
+- Strictly typecheck application source, tests, and test configuration. Keep tests outside production compilation.
+- Development runs through `tsx` with file watching. Production runs the JavaScript emitted by `tsc` with Node.js. Neither development execution nor Vitest enforces strict types; `test`, `typecheck`, and `build` are required merge checks.
 - Select a compatible Node.js and dependency set during implementation. Document the supported runtime, commit the dependency lockfile, and keep module configuration consistent between TypeScript and Node.js.
 - Document installation and the development, build, start, and validation commands in the README.
 
@@ -25,7 +28,7 @@ The requested home page extends Phase 1 from a plain-text greeting to server-ren
 
 ## Out of scope
 
-Additional page routes, navigation to unimplemented features, database access, agents, dashboards, authentication, deployment, and automated test setup. A page-specific Hono JSX component, shared layout, and linked CSS are in scope. Vitest remains the project's intended testing tool for later phases; this increment uses typecheck, build, and manual verification as requested.
+Additional page routes, navigation to unimplemented features, database access, agents, dashboards, authentication, and deployment. A page-specific Hono JSX component, shared layout, linked CSS, and Vitest setup and tests are in scope. Automated behavior checks complement manual browser and development/production checks.
 
 ## Acceptance criteria
 
@@ -35,3 +38,7 @@ Additional page routes, navigation to unimplemented features, database access, a
 4. Production compilation succeeds and its emitted entry point starts through the documented command.
 5. A valid custom port works; an invalid configured port produces a clear startup failure.
 6. A student or demo presenter can reproduce the checks using the README and [validation instructions](validation.md).
+7. `npm test` passes the Vitest acceptance tests for document metadata, clinic content, layout composition and escaping, stylesheet delivery, unknown routes, port configuration, and invalid-port startup failure.
+8. `npm run typecheck` covers both source and tests, while `npm run build` emits application modules and CSS without test files or test configuration.
+9. At 320, 375, 768, 1280, and 1440 CSS pixels, phone landscape, and 200% browser zoom, the header, main, and footer remain readable with no page-level horizontal scrolling, clipping, or overlap. Long unbroken content wraps within the container.
+10. The home link has a touch target at least 44 by 44 CSS pixels and visible keyboard focus. Zoom is not restricted, and the complete page remains usable with browser JavaScript disabled.

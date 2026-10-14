@@ -7,6 +7,11 @@ with responsive styling from `src/styles.css`, served at `/styles.css` and linke
 in the document head. The server imports the CSS through `src/styles.ts`; the
 build copies it beside the compiled module in `dist/`.
 
+All pages follow responsive design for phones, tablets, and desktops. The shared
+layout uses fluid widths, adaptive type and spacing, long-text wrapping, and a
+touch-sized home link. Responsive acceptance checks cover 320–1440 CSS pixel
+widths, phone landscape, zoom, and JavaScript-disabled rendering.
+
 Requires **Node.js 24.x** and npm. If you use nvm, run `nvm use` to select the
 runtime from `.nvmrc`.
 
@@ -27,13 +32,15 @@ Visit <http://localhost:3000/>. The page needs no browser JavaScript.
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Run the TypeScript entry point with `tsx` watching. |
-| `npm run typecheck` | Check all `.ts` and `.tsx` source with strict TypeScript, without emitting files. |
+| `npm test` | Run Vitest acceptance tests once in Node. |
+| `npm run typecheck` | Check application source, tests, and test configuration with strict TypeScript, without emitting files. |
 | `npm run build` | Compile to `dist/` and copy the CSS asset; type errors prevent emission. |
 | `npm start` | Run the compiled `dist/index.js` with Node.js. |
 
 For production, build before starting:
 
 ```sh
+npm test
 npm run typecheck
 npm run build
 npm start
@@ -48,7 +55,12 @@ curl -i http://localhost:3001/
 ```
 
 Stop a running server with Ctrl+C before starting another on the same port.
-Development execution does not enforce types, so `npm run typecheck` is required
-before merging. Follow the [validation checklist](specs/2026-10-14-hello-hono/validation.md)
-for HTTP, browser, watcher, and invalid-port checks. Recorded implementation
+Run `npm test`, `npm run typecheck`, and `npm run build` before merging.
+Vitest tests in `tests/` cover the home page, reusable layout, CSS delivery,
+unknown routes, and port configuration. Route tests use Hono's request API
+without opening a listening socket. Tests and test configuration are strictly
+checked using `tsconfig.typecheck.json` and excluded from production compilation.
+Neither development execution nor Vitest replaces typechecking. Follow the
+[validation checklist](specs/2026-10-14-hello-hono/validation.md) for automated
+checks and complementary HTTP, browser, watcher, and port checks. Recorded implementation
 results live in [verification.md](specs/2026-10-14-hello-hono/verification.md).

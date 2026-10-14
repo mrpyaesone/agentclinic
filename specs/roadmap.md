@@ -2,6 +2,11 @@
 
 Phases are intentionally small — each one is a shippable slice of work, independently reviewable and testable.
 
+Responsive design is required in every phase, rather than deferred to polish.
+Every page must satisfy the [product UI requirements](../REQUIREMENTS.md) with
+feature-specific acceptance criteria and browser checks for phones, tablets,
+desktops, landscape orientation, and zoom.
+
 ---
 
 ## Phase 1 — Hello Hono (complete)
@@ -9,11 +14,14 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 - [x] Install and configure Hono with `tsx` dev server
 - [x] Single `/` page route returning "AgentClinic is open for business"
 - [x] Confirm TypeScript types work end-to-end
+- [x] Validate the home page, layout, CSS delivery, and port configuration with Vitest acceptance tests
 
 Completed on 2026-10-14, including the requested shared header/main/footer
 layout and linked CSS extension. See the [implementation verification](2026-10-14-hello-hono/verification.md).
 
-## Phase 2 — Base Layout
+## Phase 2 — Base Layout, Agents & Ailments
+
+### Base Layout
 
 The shared header/main/footer layout and basic CSS were brought forward into
 Phase 1. Navigation and layout integration for future pages remain in this phase.
@@ -22,41 +30,41 @@ Phase 1. Navigation and layout integration for future pages remain in this phase
 - Basic CSS (custom properties, reset, typography)
 - All routes render inside the shared layout
 
-## Phase 3 — Agent List
+### Agent List
 - SQLite database + first migration (`agents` table)
 - Seed a handful of fictional agents
 - `/agents` page listing all agents
 
-## Phase 4 — Agent Detail
+### Agent Detail
 - `/agents/:id` page showing a single agent's profile
 - Name, model type, current status, presenting complaints
 
-## Phase 5 — Ailments Catalog
+### Ailments Catalog
 - `ailments` table + seed data (e.g., "context-window claustrophobia", "prompt fatigue")
 - `/ailments` list page
 - Link agents to one or more ailments
 
-## Phase 6 — Therapies Catalog
+## Phase 3 — Therapies Catalog
 - `therapies` table + seed data
 - `/therapies` list page
 - Map ailments → recommended therapies
 
-## Phase 7 — Appointment Booking
+## Phase 4 — Appointment Booking
 - `appointments` table (agent, therapist, datetime, status)
 - Form to book an appointment from an agent's detail page
 - Basic validation and confirmation page
 
-## Phase 8 — Staff Dashboard
+## Phase 5 — Staff Dashboard
 - `/dashboard` with summary counts: agents, open appointments, ailments in-flight
 - Simple table views for staff to manage records
 - Mary's dashboard is now real
 
-## Phase 9 — Polish & Accessibility
-- Responsive layout for Steve's modern-browser requirement
+## Phase 6 — Polish & Accessibility
+- Audit and refine responsive behavior across all previously implemented pages
 - Semantic HTML audit
 - Keyboard navigation and focus styles
 
-## Phase 10 — Hardening
+## Phase 7 — Hardening
 - Error pages (404, 500)
 - Input sanitization on all forms
 - Basic logging middleware
