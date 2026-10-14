@@ -5,7 +5,7 @@ import { migrate, openDatabase } from '../src/database.js';
 import { afterAll } from 'vitest';
 const db = openDatabase(':memory:');
 migrate(db);
-const app = createApp(db);
+const app = createApp(db, { log: () => {} });
 afterAll(() => db.close());
 
 describe('GET /', () => {
@@ -39,6 +39,8 @@ describe('GET /', () => {
       'href="/"',
       'href="/agents"',
       'href="/ailments"',
+      'href="/therapies"',
+      'href="/dashboard"',
     ]);
   });
 });
@@ -57,5 +59,5 @@ describe('GET /styles.css', () => {
 });
 
 it('returns 404 for an unimplemented page', async () => {
-  expect((await app.request('/therapies')).status).toBe(404);
+  expect((await app.request('/unknown')).status).toBe(404);
 });

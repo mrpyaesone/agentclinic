@@ -9,6 +9,11 @@ desktops, landscape orientation, and zoom.
 
 ---
 
+MVP implementation for phases 1–7 is now present. See the
+[MVP verification](2026-10-15-mvp/verification.md) for passing automated, runtime,
+and browser checks. Comprehensive human visual signoff remains pending before
+merge; implementation status does not assert that this prerequisite is complete.
+
 ## Phase 1 — Hello Hono (complete)
 
 - [x] Install and configure Hono with `tsx` dev server
@@ -24,7 +29,8 @@ layout and linked CSS extension. See the [implementation verification](2026-10-1
 ### Base Layout
 
 The shared header/main/footer layout and basic CSS were brought forward into
-Phase 1. Navigation and layout integration for future pages remain in this phase.
+Phase 1. Navigation, Pico CSS, agent data, profiles, and ailment integration were
+implemented in Phase 2; MVP work extends navigation and addresses its review findings.
 
 - Server-side JSX layout component (header, nav, main, footer)
 - Basic CSS (custom properties, reset, typography)

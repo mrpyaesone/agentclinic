@@ -117,3 +117,32 @@ switch to main branch and merge this branch, then delete it.
 
 Use update-changelog skill to update the changelog with work done.
 
+## Prompt 24
+
+Go through all the features on specs/roadmap.md, make a mvp branch, and ask me about the feature specs needed to complete an MVP.
+Create:
+ - A new directory under specs for this feature work
+ - In there:
+  - `plan.md` for the task list
+  - `requirements.md` for the scope, decisions, context
+  - `validation.md` for how to know the implementation succeeded and can be merged
+
+Refer to specs/mission.md and specs/tech-stack.md plus the existing feature specs for guidance.
+
+Important: You *must* use your request_user_input tool, grouped on these 3, before writing to disk.
+
+## Prompt 25
+
+Implement this plan
+
+## Prompt 26
+
+Based on the MVP, did you find anything that needs clarification in the specs? <i>(normally should review in code results and now it's MVP and just check the spec)</i>
+
+## Prompt 27
+
+Prepare sample mock data from database to view in UI
+
+## Prompt 28
+
+Commit and push the changes. Then, switch to main branch and merge this branch, then delete it.

@@ -29,8 +29,16 @@ export function migrate(db: ClinicDatabase, directory = new URL('./migrations/',
 }
 
 export function requireSchema(db: ClinicDatabase) {
-  if (!db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'agents'").get()) {
+  const hasHistory = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'migrations'").get();
+  const names = readdirSync(new URL('./migrations/', import.meta.url)).filter((name) => name.endsWith('.sql'));
+  if (!hasHistory || names.some((name) => !db.prepare('SELECT name FROM migrations WHERE name = ?').get(name))) {
     throw new Error('Clinic database is not migrated. Run npm run db:migrate before starting.');
+  }
+  // Fail before listening if schema/history was manually damaged.
+  for (const table of ['agents', 'ailments', 'agent_ailments', 'therapies', 'ailment_therapies', 'therapists', 'appointments', 'seed_history']) {
+    if (!db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?").get(table)) {
+      throw new Error('Clinic database schema is incomplete. Restore the database or apply the documented migrations.');
+    }
   }
 }
 

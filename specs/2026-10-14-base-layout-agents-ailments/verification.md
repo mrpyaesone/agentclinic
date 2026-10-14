@@ -15,8 +15,9 @@ Implemented on 2026-10-15 with Node.js v24.21.0.
 - `git diff --check`: passed.
 - After extracting named component props types, all 45 tests, strict typechecking,
   the production build, and the diff check passed again.
-- Native SQLite build approved through npm's allowScripts configuration and
-  built with `npm rebuild better-sqlite3`. Dependency versions are locked.
+- Dependency versions are locked. Correction recorded during MVP work: the locked
+  `better-sqlite3` 13.0.3 package supplies platform prebuilds and no install script.
+  The earlier approve/rebuild commands were run but did not establish a source build.
 
 ## Runtime checks — passed
 
