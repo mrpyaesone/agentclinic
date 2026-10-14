@@ -1,0 +1,6 @@
+interface:
+  display_name: "Update Changelog"
+  short_description: "Update dated changelog entries before merging"
+  default_prompt: "Use $update-changelog to update the root CHANGELOG.md for the changes about to be merged."
+policy:
+  allow_implicit_invocation: false

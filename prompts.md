@@ -112,3 +112,8 @@ Do a deep review: Spawn multiple subagents to go through all the changes on this
 ## Prompt 22
 
 switch to main branch and merge this branch, then delete it.
+
+## Prompt 23
+
+Use update-changelog skill to update the changelog with work done.
+

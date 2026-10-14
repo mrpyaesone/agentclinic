@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-15
+
+- Defined the Phase 2 scope, numbered implementation plan, and merge validation criteria for agents and ailments.
+- Added SQLite migrations, repeatable fictional seed data, configurable database paths, and development and production setup commands.
+- Implemented read-only agent lists and profiles, linked ailments, the ailments catalog, shared navigation, and helpful empty and agent-not-found states.
+- Adopted locally served Pico CSS with application overrides and production asset copying; extracted named TypeScript component props types.
+- Added database and route acceptance coverage; all 45 tests, strict typechecking, and the production build passed. Recorded runtime and browser checks, with remaining manual validation explicitly pending.
+- Recorded a review from three perspectives covering database/runtime behavior, UI/accessibility, and specs/tests, including outstanding styling, test-coverage, and documentation findings.
+- Clarified spec commit conventions and expanded development prompt history.
+- Added a manually invoked project skill for maintaining the dated changelog.
+
 ## 2026-10-14
 
 - Defined AgentClinic's mission, technology stack, roadmap, and Phase 1 specifications.
