@@ -21,6 +21,7 @@ Run on the documented Node.js runtime after installing dependencies from the com
 - In another terminal, run `curl -i http://localhost:3000/`.
 - Confirm HTTP 200 and a `text/html` content type. Inspect the HTML for the document declaration, English language, UTF-8 encoding, viewport metadata, and `AgentClinic` title.
 - Confirm a semantic main region contains one top-level heading with exactly `AgentClinic is open for business` and a short introduction to the fictional clinic.
+- Confirm the layout has one header, main, and footer, with a stylesheet link to `/styles.css`. Request that URL and confirm HTTP 200, a `text/css` content type, and the expected stylesheet contents.
 - Open the same URL in a modern browser; confirm the title, greeting, and introduction render readably at desktop and narrow mobile widths, without horizontal overflow or links to unimplemented features.
 - Disable browser JavaScript and reload; confirm the home page remains visible and readable.
 - Make and revert a harmless source edit; confirm the watcher reloads and the route remains available.
@@ -36,7 +37,7 @@ Run on the documented Node.js runtime after installing dependencies from the com
 
 - All required checks above pass, and temporary validation edits are removed.
 - README instructions reproduce dependency installation, development execution, typecheck, build, production execution, and port configuration.
-- The minimal home page meets the requirements; no reusable layout, navigation, custom CSS, database, dashboard, or other later-phase feature has been introduced.
+- The home page meets the extended requirements, including the shared header/main/footer layout and linked CSS. No database, dashboard, additional page routes, or navigation to unimplemented features has been introduced.
 - Generated output, dependencies, secrets, and unrelated changes are excluded from the feature diff.
 - Record runtime version, commands, outcomes, and manual observations in the implementation review or PR. Unresolved failures block merge.
 

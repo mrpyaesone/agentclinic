@@ -2,9 +2,12 @@
   "name": "agentclinic",
   "version": "1.0.0",
   "description": "This is testing demo for SDD(spec-driven-development) with AI agentic coding assistant.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch --include src/styles.css src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc && node -e \"require('node:fs').copyFileSync('src/styles.css', 'dist/styles.css')\"",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -13,14 +16,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/mrpyaesone/agentclinic/issues"
   },
   "homepage": "https://github.com/mrpyaesone/agentclinic#readme",
   "devDependencies": {
-    "@types/node": "^26.6.5",
-    "ts-node": "^10.9.2",
-    "typescript": "^7.0.2"
+    "@types/node": "^24.19.2",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.5",
+    "hono": "^4.13.13"
   }
 }

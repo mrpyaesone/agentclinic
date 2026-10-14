@@ -9,10 +9,11 @@ Follow the [tech stack](../tech-stack.md): Node.js, server-side TypeScript, Hono
 ## Scope and decisions
 
 - Enforce TypeScript for application source with `strict: true`, no JavaScript application source, and no explicit `any` or type-check suppression to bypass errors.
-- Provide one application route: `GET /` returns HTTP 200 with a server-rendered HTML home page and a `text/html` content type.
+- Provide one page route: `GET /` returns HTTP 200 with a server-rendered HTML home page and a `text/html` content type. Serve its linked stylesheet at `GET /styles.css` with a `text/css` content type.
 - Use Hono JSX in strictly checked `.tsx` source. The HTML document includes an English language declaration, UTF-8 encoding, viewport metadata, and an `AgentClinic` page title.
 - Include a semantic main region with one top-level heading whose text is exactly `AgentClinic is open for business`, plus a short, playful introduction explaining that this is a fictional clinic where AI agents get relief from their humans.
-- Keep the minimal home page readable with browser defaults, without client-side JavaScript, navigation to unimplemented features, or custom CSS.
+- Compose a reusable `MainLayout` from separate `Header`, `Main`, and `Footer` subcomponents. Keep the page readable with responsive plain CSS, without client-side JavaScript or navigation to unimplemented features.
+- Create a CSS file, import its contents through a Node-compatible module, link it from the layout, and include the asset in production build output.
 - Use Hono and its Node.js server adapter. Keep the application definition separate from the entry point that opens the listening socket.
 - Use port 3000 by default; allow a valid `PORT` environment variable to override it. Invalid port configuration must fail clearly at startup.
 - Provide npm scripts for development (`dev`), production compilation (`build`), production execution (`start`), and static checking (`typecheck`).
@@ -20,11 +21,11 @@ Follow the [tech stack](../tech-stack.md): Node.js, server-side TypeScript, Hono
 - Select a compatible Node.js and dependency set during implementation. Document the supported runtime, commit the dependency lockfile, and keep module configuration consistent between TypeScript and Node.js.
 - Document installation and the development, build, start, and validation commands in the README.
 
-The requested minimal home page extends Phase 1 from a plain-text greeting to server-rendered HTML while retaining the exact greeting as its heading. The reusable JSX layout and styling remain in Phase 2.
+The requested home page extends Phase 1 from a plain-text greeting to server-rendered HTML while retaining the exact greeting as its heading. A follow-up request brings the reusable JSX layout and linked CSS into this increment.
 
 ## Out of scope
 
-Shared layout, navigation, CSS, additional application routes, database access, agents, dashboards, authentication, deployment, and automated test setup. A page-specific Hono JSX component is in scope. Vitest remains the project's intended testing tool for later phases; this increment uses typecheck, build, and manual verification as requested.
+Additional page routes, navigation to unimplemented features, database access, agents, dashboards, authentication, deployment, and automated test setup. A page-specific Hono JSX component, shared layout, and linked CSS are in scope. Vitest remains the project's intended testing tool for later phases; this increment uses typecheck, build, and manual verification as requested.
 
 ## Acceptance criteria
 

@@ -38,3 +38,15 @@ Important: You *must* use your AskUserQuestion/request_user_input tool, grouped 
 ## Prompt 6
 
 Add a task group to the plan to have a minimal AgentClinic home page and update the rest of the feature spec to be in sync.
+
+## Prompt 7
+
+Implement the remaining task groups.
+
+## Prompt 8
+
+Update specs/2026-10-14-hello-hono/plan.md and implementation of a main layout component with a header/main/footer as three subcomponents. Make a CSS file, import it, and link to it.
+
+## Prompt 9
+
+Mark this specs/roadmap.md phase as complete, commit this work, switch to main, and merge this branch, then delete it.
