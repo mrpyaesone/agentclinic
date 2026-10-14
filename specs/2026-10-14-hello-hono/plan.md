@@ -1,6 +1,6 @@
 # Phase 1 — Hello Hono: plan
 
-Implement the scope in [requirements.md](requirements.md), including the requested shared layout and linked CSS extension. Complete each numbered task group before moving to the next.
+Implement the scope in [requirements.md](requirements.md), including the requested shared layout, linked CSS, and Vitest validation extensions. Complete each numbered task group before moving to the next.
 
 ## 1. Configure dependencies and TypeScript
 
@@ -32,17 +32,27 @@ Implement the scope in [requirements.md](requirements.md), including the request
 
 - [x] Configure `npm run dev` to run the TypeScript entry point with `tsx` watching.
 - [x] Include the CSS file in development watching so stylesheet edits reload the imported contents.
-- [x] Configure `npm run typecheck` to run strict static checking without emitting files.
+- [x] Configure `npm run typecheck` to run strict static checking of application source, tests, and test configuration without emitting files.
 - [x] Configure `npm run build` to compile production JavaScript with `tsc`, failing on type errors.
 - [x] Copy the stylesheet into `dist/` after successful compilation so the imported asset works in production.
 - [x] Configure `npm start` to run the compiled entry point with Node.js.
 
 ## 5. Verify and document the increment
 
-- [x] Run the typecheck, build, and manual checks in [validation.md](validation.md).
-- [x] Document installation, runtime requirements, all four scripts, and port configuration in the README.
+- [x] Run the typecheck, build, and initial manual checks in [validation.md](validation.md); record remaining styled-page browser checks.
+- [x] Document installation, runtime requirements, all five scripts, and port configuration in the README.
 - [x] Record results and any unresolved issues before requesting merge.
 - [x] Review the diff for Phase 1 scope and generated artifacts.
 - [x] Verify the shared layout, stylesheet link, CSS response, and copied production asset after the layout extension.
+
+## 6. Add Vitest acceptance validation
+
+- [x] Install Vitest, record it in the lockfile, and add `npm test` as a single `vitest run` validation command.
+- [x] Configure the Node test environment and Hono JSX transformation for `.tsx` tests.
+- [x] Cover the root response, document metadata, exact greeting, introduction, and semantic layout through Hono's request API.
+- [x] Cover reusable layout children and escaping, the linked CSS response, and an unimplemented route's 404 response.
+- [x] Extract port parsing into a testable function; cover the default, custom values, boundaries, invalid values, and invalid-port startup failure.
+- [x] Strictly typecheck tests and configuration while keeping them outside production output.
+- [x] Run tests, typecheck, and build; update requirements, validation instructions, README, and verification results.
 
 Completed on 2026-10-14. See [verification.md](verification.md) for validation results.

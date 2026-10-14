@@ -9,6 +9,7 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 - [x] Install and configure Hono with `tsx` dev server
 - [x] Single `/` page route returning "AgentClinic is open for business"
 - [x] Confirm TypeScript types work end-to-end
+- [x] Validate the home page, layout, CSS delivery, and port configuration with Vitest acceptance tests
 
 Completed on 2026-10-14, including the requested shared header/main/footer
 layout and linked CSS extension. See the [implementation verification](2026-10-14-hello-hono/verification.md).

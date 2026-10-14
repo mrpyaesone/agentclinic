@@ -28,7 +28,12 @@ AgentClinic is a server-side TypeScript application. All rendering happens on th
 
 ## Testing
 
-- **Vitest** — fast, TypeScript-native, compatible with the rest of the stack
+- **Vitest** — use automated TypeScript tests to validate application behavior and feature acceptance criteria.
+- Run `npm test` (`vitest run`) for a single validation run locally and in CI. Tests use `.test.ts` or `.test.tsx` filenames.
+- Test Hono routes through the application's request API without opening a listening socket; cover expected responses and meaningful error cases.
+- Require `npm test`, `npm run typecheck`, and `npm run build` before merging. Vitest execution does not replace strict TypeScript checking.
+- Keep manual browser checks for visual readability, responsive layouts, and accessibility alongside automated tests.
+- Use Vitest for current Phase 1 validation and subsequent work. Earlier manual-check results remain historical evidence.
 
 ## Tooling
 

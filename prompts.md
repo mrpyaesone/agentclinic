@@ -50,3 +50,11 @@ Update specs/2026-10-14-hello-hono/plan.md and implementation of a main layout c
 ## Prompt 9
 
 Mark this specs/roadmap.md phase as complete, commit this work, switch to main, and merge this branch, then delete it.
+
+## Prompt 10
+
+Update this tech-stack.md to capture that we want to use Vitest tests for validation and write a script in package.json.
+
+## Prompt 11
+
+Update existing specs and code to reflect these testing changes.

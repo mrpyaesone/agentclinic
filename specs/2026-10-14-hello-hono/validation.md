@@ -2,17 +2,27 @@
 
 ## Required checks
 
-Run on the documented Node.js runtime after installing dependencies from the committed lockfile with `npm ci`. These are implementation acceptance checks; they have not been executed as part of writing this specification.
+Run on the documented Node.js runtime after installing dependencies from the lockfile with `npm ci`. Current recorded outcomes are in [verification.md](verification.md).
+
+### Automated acceptance tests
+
+- Run `npm test`; expect exit code 0 with all Vitest tests passing.
+- Tests in `tests/` run in Node with Hono JSX configured in `vitest.config.ts`.
+- Route tests use `app.request()` and do not start a network server. Confirm coverage of HTTP status and content types, document metadata, exact heading and introduction, header/main/footer order, stylesheet link and contents, and an unimplemented route's 404 response.
+- Layout tests cover rendering arbitrary children inside main and escaping text children.
+- Port tests cover the unset default, a custom port, valid boundaries, invalid values, and a subprocess startup failure with a clear message and exit code 1 before opening a socket.
+- Keep the following manual checks for browser rendering, file watching, compiled asset delivery, and listening on a configured port.
 
 ### 1. Enforced TypeScript
 
 - Run `npm run typecheck`; expect exit code 0.
-- Confirm `strict: true`, coverage of both `.ts` and `.tsx` application source, Hono JSX configuration, and no JavaScript application files or type-check bypasses.
+- Confirm `strict: true`, coverage of both `.ts` and `.tsx` application source and tests plus `vitest.config.ts`, Hono JSX configuration, and no JavaScript application files or type-check bypasses. `tsconfig.typecheck.json` extends the production compiler settings with test coverage and no emission.
 - Temporarily introduce an unmistakable type mismatch in a checked source file, such as assigning a string to a number variable. Confirm `npm run typecheck` exits nonzero, then remove the temporary change and rerun successfully.
 
 ### 2. Production build
 
 - Run `npm run build`; expect exit code 0 and an emitted Node.js entry point.
+- Confirm `dist/styles.css` matches `src/styles.css`, and production compilation includes only application modules, without test files or Vitest configuration.
 - Confirm build configuration prevents successful emission when type errors are present.
 
 ### 3. Manual development check
@@ -36,9 +46,10 @@ Run on the documented Node.js runtime after installing dependencies from the com
 ## Merge readiness
 
 - All required checks above pass, and temporary validation edits are removed.
-- README instructions reproduce dependency installation, development execution, typecheck, build, production execution, and port configuration.
+- `npm test`, `npm run typecheck`, and `npm run build` all pass; successful Vitest execution alone does not establish type safety or browser readability.
+- README instructions reproduce dependency installation, development execution, Vitest tests, typecheck, build, production execution, and port configuration.
 - The home page meets the extended requirements, including the shared header/main/footer layout and linked CSS. No database, dashboard, additional page routes, or navigation to unimplemented features has been introduced.
 - Generated output, dependencies, secrets, and unrelated changes are excluded from the feature diff.
 - Record runtime version, commands, outcomes, and manual observations in the implementation review or PR. Unresolved failures block merge.
 
-Automated route tests are deferred for this phase by user decision. Manual HTTP checks cover the root response; they must be performed rather than inferred from a successful compilation.
+Vitest now provides automated acceptance validation for this phase. Manual HTTP and browser checks complement those tests; visual readability and successful listening must be observed separately.

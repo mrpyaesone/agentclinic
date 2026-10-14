@@ -1,16 +1,12 @@
 import { serve } from '@hono/node-server';
 import app from './app.js';
+import { getPort } from './port.js';
 
-const configuredPort = process.env.PORT;
-const port = configuredPort === undefined ? 3000 : Number(configuredPort);
-
-if (
-  (configuredPort !== undefined && !/^\d+$/.test(configuredPort)) ||
-  !Number.isInteger(port) ||
-  port < 1 ||
-  port > 65535
-) {
-  console.error('Invalid PORT: expected an integer between 1 and 65535.');
+let port: number;
+try {
+  port = getPort(process.env.PORT);
+} catch (error) {
+  console.error(error instanceof Error ? error.message : String(error));
   process.exit(1);
 }
 

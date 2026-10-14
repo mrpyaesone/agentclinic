@@ -1,7 +1,8 @@
 # Phase 1 — implementation verification
 
 Initial implementation completed on 2026-10-14 using Node.js v24.21.0 and npm 11.19.0 on macOS.
-All five task groups in [plan.md](plan.md) are complete.
+The original five task groups were completed first; the Vitest extension adds
+the sixth group in [plan.md](plan.md).
 
 | Check | Result |
 | --- | --- |
@@ -18,9 +19,9 @@ All five task groups in [plan.md](plan.md) are complete.
 | Diff review | Phase 1 scope only. `git diff --check` passed; `dist/` and `node_modules/` are ignored. No JavaScript application source, explicit `any`, or type-check suppression was added. |
 
 The HTML includes a doctype, `lang="en"`, UTF-8 encoding, viewport metadata,
-and the `AgentClinic` title. Rendering uses Hono server-side JSX with browser
-defaults. Shared layouts, navigation, CSS, database features, and an automated
-test setup remain deferred as specified.
+and the `AgentClinic` title. The initial implementation used Hono server-side
+JSX with browser defaults. Shared layout, CSS, and automated tests were deferred
+at that point; the extensions below bring those features into Phase 1.
 
 The sandbox blocked local sockets, so development, production, HTTP, and
 browser checks ran with approved access outside the sandbox. npm reported
@@ -56,3 +57,39 @@ Validation on the same runtime:
 The browser observations above describe the original unstyled increment.
 The extension uses responsive container widths and heading sizes; a browser
 check of the styled page remains to be performed.
+
+## Vitest validation extension
+
+All six task groups are now implemented. Vitest 5.0.4 runs in Node with Hono JSX
+configured explicitly for TSX tests. Route tests use the application's request
+API; they do not start a listening server. Port parsing is shared between the
+entry point and unit tests, while a subprocess test verifies that invalid
+configuration produces a clear startup error and exit code 1 before listening.
+
+The three suites contain 22 passing tests:
+
+- Home page status and HTML content type, doctype and metadata, exact greeting,
+  fictional-clinic introduction, semantic header/main/footer ordering, absence
+  of client scripts, and links only to implemented resources.
+- Stylesheet link, CSS response status and content type, and exact file contents;
+  an unimplemented page returns 404.
+- Reusable layout content placement and escaping of text children.
+- Default/custom ports, valid boundaries, invalid numeric and nonnumeric values,
+  and actual invalid-port startup failure.
+
+Verified using Node.js v24.21.0 and npm 11.19.0:
+
+| Command | Result |
+| --- | --- |
+| `npm ci` | Passed from the updated lockfile. |
+| `npm test` | Passed: 3 files, 22 tests. |
+| `npm run typecheck` | Passed, including application source, tests, and Vitest configuration. |
+| `npm run build` | Passed; output contains application modules and CSS only. |
+| `git diff --check` | Passed. |
+
+`tsconfig.typecheck.json` extends the production compiler settings to cover the
+tests and configuration without emission. The production compiler still only
+includes `src/`. Tests and configuration are not copied into `dist/`.
+
+Automated checks pass. The styled-page browser check noted above remains pending;
+Vitest does not establish visual readability, responsiveness, or accessibility.
