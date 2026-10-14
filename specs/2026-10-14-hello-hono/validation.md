@@ -2,17 +2,27 @@
 
 ## Required checks
 
-Run on the documented Node.js runtime after installing dependencies from the committed lockfile with `npm ci`. These are implementation acceptance checks; they have not been executed as part of writing this specification.
+Run on the documented Node.js runtime after installing dependencies from the lockfile with `npm ci`. Current recorded outcomes are in [verification.md](verification.md).
+
+### Automated acceptance tests
+
+- Run `npm test`; expect exit code 0 with all Vitest tests passing.
+- Tests in `tests/` run in Node with Hono JSX configured in `vitest.config.ts`.
+- Route tests use `app.request()` and do not start a network server. Confirm coverage of HTTP status and content types, document metadata, exact heading and introduction, header/main/footer order, stylesheet link and contents, and an unimplemented route's 404 response.
+- Layout tests cover rendering arbitrary children inside main and escaping text children.
+- Port tests cover the unset default, a custom port, valid boundaries, invalid values, and a subprocess startup failure with a clear message and exit code 1 before opening a socket.
+- Keep the following manual checks for browser rendering, file watching, compiled asset delivery, and listening on a configured port.
 
 ### 1. Enforced TypeScript
 
 - Run `npm run typecheck`; expect exit code 0.
-- Confirm `strict: true`, coverage of both `.ts` and `.tsx` application source, Hono JSX configuration, and no JavaScript application files or type-check bypasses.
+- Confirm `strict: true`, coverage of both `.ts` and `.tsx` application source and tests plus `vitest.config.ts`, Hono JSX configuration, and no JavaScript application files or type-check bypasses. `tsconfig.typecheck.json` extends the production compiler settings with test coverage and no emission.
 - Temporarily introduce an unmistakable type mismatch in a checked source file, such as assigning a string to a number variable. Confirm `npm run typecheck` exits nonzero, then remove the temporary change and rerun successfully.
 
 ### 2. Production build
 
 - Run `npm run build`; expect exit code 0 and an emitted Node.js entry point.
+- Confirm `dist/styles.css` matches `src/styles.css`, and production compilation includes only application modules, without test files or Vitest configuration.
 - Confirm build configuration prevents successful emission when type errors are present.
 
 ### 3. Manual development check
@@ -21,7 +31,11 @@ Run on the documented Node.js runtime after installing dependencies from the com
 - In another terminal, run `curl -i http://localhost:3000/`.
 - Confirm HTTP 200 and a `text/html` content type. Inspect the HTML for the document declaration, English language, UTF-8 encoding, viewport metadata, and `AgentClinic` title.
 - Confirm a semantic main region contains one top-level heading with exactly `AgentClinic is open for business` and a short introduction to the fictional clinic.
-- Open the same URL in a modern browser; confirm the title, greeting, and introduction render readably at desktop and narrow mobile widths, without horizontal overflow or links to unimplemented features.
+- Confirm the layout has one header, main, and footer, with a stylesheet link to `/styles.css`. Request that URL and confirm HTTP 200, a `text/css` content type, and the expected stylesheet contents.
+- Open the same URL in a modern browser at 320×812, 375×812, 768×1024, 1280×800, and 1440×900; also check phone landscape at 812×375. Confirm the title, greeting, introduction, header, and footer remain readable without page-level horizontal overflow, clipping, or overlapping regions.
+- Check 200% browser zoom, including reflow at an effective 640 CSS pixel width on a 1280 pixel desktop. Also increase text size to 200% at the narrowest viewport. All content and the home link must remain usable; the page must allow zoom.
+- Temporarily add a long unbroken name or URL to the main content using browser developer tools; confirm it wraps without page-level overflow. Reload to remove the temporary change.
+- Confirm the home link's target is at least 44×44 CSS pixels and its keyboard focus indicator is visible. Confirm there are no links to unimplemented features.
 - Disable browser JavaScript and reload; confirm the home page remains visible and readable.
 - Make and revert a harmless source edit; confirm the watcher reloads and the route remains available.
 - Stop the development server before the production check.
@@ -35,9 +49,11 @@ Run on the documented Node.js runtime after installing dependencies from the com
 ## Merge readiness
 
 - All required checks above pass, and temporary validation edits are removed.
-- README instructions reproduce dependency installation, development execution, typecheck, build, production execution, and port configuration.
-- The minimal home page meets the requirements; no reusable layout, navigation, custom CSS, database, dashboard, or other later-phase feature has been introduced.
+- `npm test`, `npm run typecheck`, and `npm run build` all pass; successful Vitest execution alone does not establish type safety or browser readability.
+- README instructions reproduce dependency installation, development execution, Vitest tests, typecheck, build, production execution, and port configuration.
+- The home page meets the extended requirements, including the shared header/main/footer layout and linked CSS. No database, dashboard, additional page routes, or navigation to unimplemented features has been introduced.
+- Responsive browser checks satisfy the feature's viewport, reflow, long-content, zoom, touch-target, and JavaScript-disabled acceptance criteria. Vitest markup checks alone do not establish responsive rendering.
 - Generated output, dependencies, secrets, and unrelated changes are excluded from the feature diff.
 - Record runtime version, commands, outcomes, and manual observations in the implementation review or PR. Unresolved failures block merge.
 
-Automated route tests are deferred for this phase by user decision. Manual HTTP checks cover the root response; they must be performed rather than inferred from a successful compilation.
+Vitest now provides automated acceptance validation for this phase. Manual HTTP and browser checks complement those tests; visual readability and successful listening must be observed separately.
