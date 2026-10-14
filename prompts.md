@@ -58,3 +58,7 @@ Update this tech-stack.md to capture that we want to use Vitest tests for valida
 ## Prompt 11
 
 Update existing specs and code to reflect these testing changes.
+
+## Prompt 12 ( if not automatically response with tests from <i>Prompt 11</i> )
+
+Write a new test suite using the specified testing framework.
