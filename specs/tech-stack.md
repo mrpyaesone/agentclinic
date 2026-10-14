@@ -2,6 +2,9 @@
 
 AgentClinic is a server-side TypeScript application. All rendering happens on the server; the browser receives plain HTML that works well and looks good.
 
+The web UI uses responsive design on every page from its first implementation.
+Follow the product's [responsive UI requirements](../REQUIREMENTS.md).
+
 ## Core
 
 | Layer | Choice | Rationale |
@@ -11,6 +14,14 @@ AgentClinic is a server-side TypeScript application. All rendering happens on th
 | Server framework | **Hono** | Lightweight, TypeScript-first, fast, excellent DX; routes and middleware feel natural |
 | Templating | Hono JSX (server-side) | JSX without React overhead; components are just functions |
 | CSS | Plain CSS + CSS custom properties | No build step required; Steve gets a modern, attractive result |
+
+## Responsive UI
+
+- Use mobile-first plain CSS with fluid containers, flexible layouts, relative spacing, and adaptive typography. Add media queries when content requires a different arrangement.
+- Include viewport metadata without disabling zoom. Wrap long content, allow flex/grid children to shrink, and keep wide tables within their own scrolling region.
+- Validate at 320, 375, 768, 1280, and 1440 CSS pixels, phone landscape, and 200% browser zoom. No page-level horizontal overflow or overlap is acceptable.
+- Keep interactive targets at least 44 by 44 CSS pixels with visible keyboard focus. Core content must work without client-side JavaScript.
+- Require responsive acceptance criteria in every feature spec. Vitest covers behavior and markup; browser checks establish actual reflow and visual usability.
 
 ## Recommended: Hono
 

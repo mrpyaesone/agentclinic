@@ -93,3 +93,18 @@ includes `src/`. Tests and configuration are not copied into `dist/`.
 
 Automated checks pass. The styled-page browser check noted above remains pending;
 Vitest does not establish visual readability, responsiveness, or accessibility.
+
+## Responsive UI requirements
+
+Product and feature specs now require responsive design from the first increment,
+including viewport checks from 320 to 1440 CSS pixels, phone landscape, 200% zoom,
+long-content wrapping, and usable touch and keyboard controls.
+
+The existing fluid container and adaptive typography remain in place. Shared
+containers now allow shrinking and wrapping of unbroken text, and the home link
+has a minimum 2.75rem target width and height (44 pixels at the default font size).
+
+Vitest passed all 22 tests; strict typecheck and production build passed.
+The responsive browser verification was interrupted before results were collected.
+The viewport, landscape, long-content, zoom, and touch/focus browser checks in
+[validation.md](validation.md) remain pending and are unchecked in the plan.

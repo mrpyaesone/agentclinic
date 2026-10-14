@@ -7,6 +7,11 @@ with responsive styling from `src/styles.css`, served at `/styles.css` and linke
 in the document head. The server imports the CSS through `src/styles.ts`; the
 build copies it beside the compiled module in `dist/`.
 
+All pages follow responsive design for phones, tablets, and desktops. The shared
+layout uses fluid widths, adaptive type and spacing, long-text wrapping, and a
+touch-sized home link. Responsive acceptance checks cover 320–1440 CSS pixel
+widths, phone landscape, zoom, and JavaScript-disabled rendering.
+
 Requires **Node.js 24.x** and npm. If you use nvm, run `nvm use` to select the
 runtime from `.nvmrc`.
 

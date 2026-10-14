@@ -62,3 +62,7 @@ Update existing specs and code to reflect these testing changes.
 ## Prompt 12 ( if not automatically response with tests from <i>Prompt 11</i> )
 
 Write a new test suite using the specified testing framework.
+
+## Prompt 13
+
+The product's web UI should follow responsive design. If it's not responsive design, update the product specs and all feature specs to reflect this, as well as any code.

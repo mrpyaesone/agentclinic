@@ -32,7 +32,10 @@ Run on the documented Node.js runtime after installing dependencies from the loc
 - Confirm HTTP 200 and a `text/html` content type. Inspect the HTML for the document declaration, English language, UTF-8 encoding, viewport metadata, and `AgentClinic` title.
 - Confirm a semantic main region contains one top-level heading with exactly `AgentClinic is open for business` and a short introduction to the fictional clinic.
 - Confirm the layout has one header, main, and footer, with a stylesheet link to `/styles.css`. Request that URL and confirm HTTP 200, a `text/css` content type, and the expected stylesheet contents.
-- Open the same URL in a modern browser; confirm the title, greeting, and introduction render readably at desktop and narrow mobile widths, without horizontal overflow or links to unimplemented features.
+- Open the same URL in a modern browser at 320×812, 375×812, 768×1024, 1280×800, and 1440×900; also check phone landscape at 812×375. Confirm the title, greeting, introduction, header, and footer remain readable without page-level horizontal overflow, clipping, or overlapping regions.
+- Check 200% browser zoom, including reflow at an effective 640 CSS pixel width on a 1280 pixel desktop. Also increase text size to 200% at the narrowest viewport. All content and the home link must remain usable; the page must allow zoom.
+- Temporarily add a long unbroken name or URL to the main content using browser developer tools; confirm it wraps without page-level overflow. Reload to remove the temporary change.
+- Confirm the home link's target is at least 44×44 CSS pixels and its keyboard focus indicator is visible. Confirm there are no links to unimplemented features.
 - Disable browser JavaScript and reload; confirm the home page remains visible and readable.
 - Make and revert a harmless source edit; confirm the watcher reloads and the route remains available.
 - Stop the development server before the production check.
@@ -49,6 +52,7 @@ Run on the documented Node.js runtime after installing dependencies from the loc
 - `npm test`, `npm run typecheck`, and `npm run build` all pass; successful Vitest execution alone does not establish type safety or browser readability.
 - README instructions reproduce dependency installation, development execution, Vitest tests, typecheck, build, production execution, and port configuration.
 - The home page meets the extended requirements, including the shared header/main/footer layout and linked CSS. No database, dashboard, additional page routes, or navigation to unimplemented features has been introduced.
+- Responsive browser checks satisfy the feature's viewport, reflow, long-content, zoom, touch-target, and JavaScript-disabled acceptance criteria. Vitest markup checks alone do not establish responsive rendering.
 - Generated output, dependencies, secrets, and unrelated changes are excluded from the feature diff.
 - Record runtime version, commands, outcomes, and manual observations in the implementation review or PR. Unresolved failures block merge.
 

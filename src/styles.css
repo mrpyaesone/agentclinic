@@ -26,7 +26,9 @@ body {
 
 .container {
   width: min(100% - 2rem, 64rem);
+  min-width: 0;
   margin-inline: auto;
+  overflow-wrap: anywhere;
 }
 
 .site-header {
@@ -36,6 +38,10 @@ body {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
   color: var(--accent);
   font-size: 1.5rem;
   font-weight: 700;

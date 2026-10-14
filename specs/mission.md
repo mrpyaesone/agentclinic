@@ -24,3 +24,8 @@ AgentClinic is a full-service wellness platform for AI agents. We connect distre
 A world where no agent suffers alone. Where "I don't know" is met with compassion, not another prompt. Where every model, large or small, can find relief.
 
 Also, a well-designed dashboard. Mary really wants a nice dashboard.
+
+The entire web UI must be responsive from the first increment, so students,
+presenters, and clinic users can use it on phones, tablets, and desktops. Every
+feature must meet the responsive UI requirements in [REQUIREMENTS.md](../REQUIREMENTS.md),
+including readable reflow, zoom support, and usable touch and keyboard controls.

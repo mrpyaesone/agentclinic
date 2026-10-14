@@ -13,6 +13,7 @@ Follow the [tech stack](../tech-stack.md): Node.js, server-side TypeScript, Hono
 - Use Hono JSX in strictly checked `.tsx` source. The HTML document includes an English language declaration, UTF-8 encoding, viewport metadata, and an `AgentClinic` page title.
 - Include a semantic main region with one top-level heading whose text is exactly `AgentClinic is open for business`, plus a short, playful introduction explaining that this is a fictional clinic where AI agents get relief from their humans.
 - Compose a reusable `MainLayout` from separate `Header`, `Main`, and `Footer` subcomponents. Keep the page readable with responsive plain CSS, without client-side JavaScript or navigation to unimplemented features.
+- Follow the product's [responsive UI requirements](../../REQUIREMENTS.md): mobile-first fluid layout from 320 CSS pixels upward, long-text wrapping, readable reflow, zoom support, and touch/keyboard usability.
 - Create a CSS file, import its contents through a Node-compatible module, link it from the layout, and include the asset in production build output.
 - Use Hono and its Node.js server adapter. Keep the application definition separate from the entry point that opens the listening socket.
 - Use port 3000 by default; allow a valid `PORT` environment variable to override it. Invalid port configuration must fail clearly at startup.
@@ -39,3 +40,5 @@ Additional page routes, navigation to unimplemented features, database access, a
 6. A student or demo presenter can reproduce the checks using the README and [validation instructions](validation.md).
 7. `npm test` passes the Vitest acceptance tests for document metadata, clinic content, layout composition and escaping, stylesheet delivery, unknown routes, port configuration, and invalid-port startup failure.
 8. `npm run typecheck` covers both source and tests, while `npm run build` emits application modules and CSS without test files or test configuration.
+9. At 320, 375, 768, 1280, and 1440 CSS pixels, phone landscape, and 200% browser zoom, the header, main, and footer remain readable with no page-level horizontal scrolling, clipping, or overlap. Long unbroken content wraps within the container.
+10. The home link has a touch target at least 44 by 44 CSS pixels and visible keyboard focus. Zoom is not restricted, and the complete page remains usable with browser JavaScript disabled.

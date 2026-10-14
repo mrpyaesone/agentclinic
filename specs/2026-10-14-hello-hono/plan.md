@@ -56,3 +56,11 @@ Implement the scope in [requirements.md](requirements.md), including the request
 - [x] Run tests, typecheck, and build; update requirements, validation instructions, README, and verification results.
 
 Completed on 2026-10-14. See [verification.md](verification.md) for validation results.
+
+## 7. Enforce responsive UI requirements
+
+- [x] Align product and feature specs on responsive design from the first increment, rather than deferring it to Phase 9.
+- [x] Retain the fluid container, viewport metadata, adaptive spacing, and heading sizes.
+- [x] Allow shared containers to shrink and wrap long text; provide a touch-sized home link with visible focus.
+- [ ] Check the styled page at the required viewport widths, landscape orientation, enlarged text, and zoom-equivalent reflow with JavaScript disabled.
+- [x] Run Vitest, typecheck, and build; record the pending responsive browser checks in verification results.

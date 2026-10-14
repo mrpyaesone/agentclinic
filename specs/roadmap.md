@@ -2,6 +2,11 @@
 
 Phases are intentionally small — each one is a shippable slice of work, independently reviewable and testable.
 
+Responsive design is required in every phase, rather than deferred to polish.
+Every page must satisfy the [product UI requirements](../REQUIREMENTS.md) with
+feature-specific acceptance criteria and browser checks for phones, tablets,
+desktops, landscape orientation, and zoom.
+
 ---
 
 ## Phase 1 — Hello Hono (complete)
@@ -53,7 +58,7 @@ Phase 1. Navigation and layout integration for future pages remain in this phase
 - Mary's dashboard is now real
 
 ## Phase 9 — Polish & Accessibility
-- Responsive layout for Steve's modern-browser requirement
+- Audit and refine responsive behavior across all previously implemented pages
 - Semantic HTML audit
 - Keyboard navigation and focus styles
 
