@@ -130,3 +130,11 @@ Create:
 Refer to specs/mission.md and specs/tech-stack.md plus the existing feature specs for guidance.
 
 Important: You *must* use your request_user_input tool, grouped on these 3, before writing to disk.
+
+## Prompt 25
+
+Implement this plan
+
+## Prompt 26
+
+Based on the MVP, did you find anything that needs clarification in the specs?

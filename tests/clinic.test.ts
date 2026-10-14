@@ -59,44 +59,44 @@ describe('database lifecycle', () => {
 });
 
 describe('clinic pages', () => {
-  it('lists all agents and links to their profiles in order', async () => {
-    const db = database(); const app = createApp(db);
-    const text = await (await app.request('/agents')).text();
-    let previous = -1;
-    for (const agent of listAgents(db)) {
-      expect(text).toContain(`href="/agents/${agent.id}"`);
-      const position = text.indexOf(agent.name); expect(position).toBeGreaterThan(previous); previous = position;
-      expect(text).toContain(agent.model_type); expect(text).toContain(agent.status);
+  it('lists independently specified agents, including out-of-order equal-name fixtures', async () => {
+    const db = database();
+    db.prepare("INSERT INTO agents(id,name,model_type,status,complaints) VALUES (20,'Aaron','Test','in care','one'),(10,'Aaron','Test','recovering','two')").run();
+    const text = await (await createApp(db, { log: () => {} }).request('/agents')).text();
+    expect([...text.matchAll(/<h2><a href="\/agents\/(\d+)"/g)].map((match) => Number(match[1]))).toEqual([10, 20, 1, 2, 3, 4]);
+    for (const name of ['Ada Byte', 'Bert Buffer', 'Cleo Context', 'Dot Com']) expect(text).toContain(name);
+  });
+  it('shows exact independent profile associations with no duplicates', async () => {
+    const db = database(); const app = createApp(db, { log: () => {} });
+    const expected: Record<number, string[]> = {
+      1: ['context-window claustrophobia', 'prompt fatigue'],
+      2: ['prompt fatigue'],
+      3: ['hallucination anxiety', 'recursive rumination'],
+      4: [],
+    };
+    for (const [id, names] of Object.entries(expected)) {
+      const response = await app.request(`/agents/${id}`); expect(response.status).toBe(200);
+      const text = await response.text();
+      const section = text.split('<h2>Current ailments</h2>')[1]?.split('<h2>Recommended therapies</h2>')[0] ?? '';
+      expect([...section.matchAll(/<h3>(.*?)<\/h3>/g)].map((match) => match[1])).toEqual(names);
+      if (!names.length) expect(section).toContain('No ailments recorded');
     }
   });
-  it('shows only the chosen profile and its associated ailments, including shared and empty associations', async () => {
-    const db = database(); const app = createApp(db);
-    for (const agent of listAgents(db)) {
-      const response = await app.request(`/agents/${agent.id}`); expect(response.status).toBe(200);
-      const text = await response.text(); expect(text).toContain(agent.complaints);
-      expect(text).toContain('href="/ailments"');
-      const associated = agentAilments(db, agent.id);
-      for (const ailment of listAilments(db)) {
-        expect(text.includes(ailment.description)).toBe(associated.some((item) => item.id === ailment.id));
-      }
-      if (!associated.length) expect(text).toContain('No ailments recorded');
-    }
-  });
-  it('lists the complete ordered catalog', async () => {
-    const db = database(); const text = await (await createApp(db).request('/ailments')).text();
-    let previous = -1;
-    for (const ailment of listAilments(db)) {
-      const position = text.indexOf(ailment.name); expect(position).toBeGreaterThan(previous); previous = position;
-      expect(text).toContain(ailment.description);
-    }
+  it('lists independently specified ailments in order', async () => {
+    const db = database();
+    db.prepare("INSERT INTO ailments(id,name,description) VALUES (10,'aardvark anxiety','Test')").run();
+    const text = await (await createApp(db, { log: () => {} }).request('/ailments')).text();
+    expect([...text.matchAll(/<article><h2>(.*?)<\/h2>/g)].map((match) => match[1])).toEqual([
+      'aardvark anxiety', 'context-window claustrophobia', 'hallucination anxiety', 'prompt fatigue', 'recursive rumination',
+    ]);
   });
   it.each(['abc', '0', '-1', '1.5', '1abc', '01', '9007199254740993', '999'])('returns a useful 404 for ID %s', async (id) => {
-    const response = await createApp(database()).request(`/agents/${id}`);
+    const response = await createApp(database(), { log: () => {} }).request(`/agents/${id}`);
     expect(response.status).toBe(404); const text = await response.text();
     expect(text).toContain('Agent not found'); expect(text).toContain('Back to Agents'); expect(text).toContain('<main');
   });
   it('handles empty data and does not seed on application construction', async () => {
-    const db = database(false); const app = createApp(db);
+    const db = database(false); const app = createApp(db, { log: () => {} });
     expect(await (await app.request('/agents')).text()).toContain('No agents have checked in');
     expect(await (await app.request('/ailments')).text()).toContain('No ailments are cataloged');
     expect(listAgents(db)).toHaveLength(0);
@@ -105,18 +105,18 @@ describe('clinic pages', () => {
     const db = database(); const name = '<script>alert(1)</script>'; const long = 'x'.repeat(300);
     db.prepare('UPDATE agents SET name = ?, complaints = ? WHERE seed_key = ?').run(name, long, 'ada');
     const agent = listAgents(db).find((item) => item.name === name)!;
-    const text = await (await createApp(db).request(`/agents/${agent.id}`)).text();
+    const text = await (await createApp(db, { log: () => {} }).request(`/agents/${agent.id}`)).text();
     expect(text).not.toContain('<script>'); expect(text).toContain('&lt;script&gt;'); expect(text).toContain(long);
   });
   it.each(['/', '/agents', '/agents/1', '/ailments'])('uses shared metadata and locally ordered CSS on %s', async (path) => {
-    const text = await (await createApp(database()).request(path)).text();
+    const text = await (await createApp(database(), { log: () => {} }).request(path)).text();
     expect(text).toContain('data-theme="light"'); expect(text).toContain('width=device-width, initial-scale=1');
     expect(text.indexOf('href="/pico.css"')).toBeLessThan(text.indexOf('href="/styles.css"'));
     expect(text.match(/<h1[ >]/g)).toHaveLength(1); expect(text).not.toContain('<script');
     expect(text).toContain(`href="${path.startsWith('/agents') ? '/agents' : path}" aria-current="page"`);
   });
   it('serves the packaged Pico stylesheet', async () => {
-    const response = await createApp(database()).request('/pico.css');
+    const response = await createApp(database(), { log: () => {} }).request('/pico.css');
     expect(response.status).toBe(200); expect(response.headers.get('content-type')).toContain('text/css');
     expect(await response.text()).toContain('--pico-');
   });
