@@ -137,4 +137,12 @@ Implement this plan
 
 ## Prompt 26
 
-Based on the MVP, did you find anything that needs clarification in the specs?
+Based on the MVP, did you find anything that needs clarification in the specs? <i>(normally should review in code results and now it's MVP and just check the spec)</i>
+
+## Prompt 27
+
+Prepare sample mock data from database to view in UI
+
+## Prompt 28
+
+Commit and push the changes. Then, switch to main branch and merge this branch, then delete it.
