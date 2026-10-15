@@ -10,13 +10,13 @@ Use the simple demo defaults in [tech-stack.md](tech-stack.md). Each numbered ph
 
 Phases 1–5 are complete. See [the feedback feature plan](2026-10-15-feedback-form/plan.md) and [validation evidence](2026-10-15-feedback-form/validation.md).
 
-| Phase | Work | Done when |
-| --- | --- | --- |
-| 1 | Add feedback storage. | A migration creates a table for name, email, message, rating, and submission timestamp; a parameterized insert can save sample feedback. |
-| 2 | Add the feedback page and navigation entry. | Visitors can find required Name, Email, Message (2,000-character limit), and Rating (1–5) fields; unfinished submission is not presented as operational. |
-| 3 | Implement submission and validation. | The server validates all four fields, rejects invalid input with field errors, preserves safe input on validation failure, and stores valid feedback in SQLite and displays all submissions on the feedback page with email addresses excluded. |
-| 4 | Add submission outcomes. | Success shows confirmation; storage failure shows a useful retry message without exposing internal details. |
-| 5 | Verify the feedback journey. | Meaningful checks cover persistence, validation, and failures; keyboard and narrow-screen checks pass and existing journeys still work. |
+| Phase | Status | Work | Done when |
+| --- | --- | --- | --- |
+| 1 | Complete | Add feedback storage. | A migration creates a table for name, email, message, rating, and submission timestamp; a parameterized insert can save sample feedback. |
+| 2 | Complete | Add the feedback page and navigation entry. | Visitors can find required Name, Email, Message (2,000-character limit), and Rating (1–5) fields; unfinished submission is not presented as operational. |
+| 3 | Complete | Implement submission and validation. | The server validates all four fields, rejects invalid input with field errors, preserves safe input on validation failure, and stores valid feedback in SQLite and displays all submissions on the feedback page with email addresses excluded. |
+| 4 | Complete | Add submission outcomes. | Success shows confirmation; storage failure shows a useful retry message without exposing internal details. |
+| 5 | Complete | Verify the feedback journey. | Meaningful checks cover persistence, validation, and failures; keyboard and narrow-screen checks pass and existing journeys still work. |
 
 ## Now: customer reviews
 
