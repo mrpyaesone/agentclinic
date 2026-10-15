@@ -35,7 +35,7 @@ export function requireSchema(db: ClinicDatabase) {
     throw new Error('Clinic database is not migrated. Run npm run db:migrate before starting.');
   }
   // Fail before listening if schema/history was manually damaged.
-  for (const table of ['agents', 'ailments', 'agent_ailments', 'therapies', 'ailment_therapies', 'therapists', 'appointments', 'seed_history']) {
+  for (const table of ['agents', 'ailments', 'agent_ailments', 'therapies', 'ailment_therapies', 'therapists', 'appointments', 'seed_history', 'feedback']) {
     if (!db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?").get(table)) {
       throw new Error('Clinic database schema is incomplete. Restore the database or apply the documented migrations.');
     }
