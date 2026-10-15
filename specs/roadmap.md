@@ -2,7 +2,7 @@
 
 ## Ordering and delivery rules
 
-Follow [TODO.md](../TODO.md): **Done — feedback form; Now — customer reviews; Next — About us with address and map.** Existing agents, ailments, therapies, booking, and dashboard features are the baseline; they do not need rebuilding.
+Follow [TODO.md](../TODO.md): **Done — feedback form and customer reviews; Now — About us with address and map.** Existing agents, ailments, therapies, booking, and dashboard features are the baseline; they do not need rebuilding.
 
 Use the simple demo defaults in [tech-stack.md](tech-stack.md). Each numbered phase is a small, independently reviewable change. Complete its acceptance criteria before proceeding. There are no open-decision or production-readiness tasks. Completion status is recorded per feature below.
 
@@ -18,15 +18,17 @@ Phases 1–5 are complete. See [the feedback feature plan](2026-10-15-feedback-f
 | 4 | Complete | Add submission outcomes. | Success shows confirmation; storage failure shows a useful retry message without exposing internal details. |
 | 5 | Complete | Verify the feedback journey. | Meaningful checks cover persistence, validation, and failures; keyboard and narrow-screen checks pass and existing journeys still work. |
 
-## Now: customer reviews
+## Done: customer reviews
 
-| Phase | Work | Done when |
-| --- | --- | --- |
-| 6 | Add sample review content. | A small static collection contains fictional agent names and review text, without a new database table. |
-| 7 | Display reviews and add navigation. | Visitors can find and read reviews in the shared layout, clearly labeled as fictional samples. |
-| 8 | Verify review presentation. | Content renders safely and reads well on desktop and narrow screens; navigation works by keyboard. |
+Phases 6–8 are complete. See the [plan](2026-10-15-customer-reviews/plan.md) and [validation evidence](2026-10-15-customer-reviews/validation.md).
 
-## Next: About us with address and map
+| Phase | Status | Work | Done when |
+| --- | --- | --- | --- |
+| 6 | Complete | Add sample review content. | A small static collection contains fictional agent names and review text, without a new database table. |
+| 7 | Complete | Display reviews and add navigation. | Visitors can find and read reviews in the shared layout, clearly labeled as fictional samples. |
+| 8 | Complete | Verify review presentation. | Content renders safely and reads well on desktop and narrow screens; navigation works by keyboard. |
+
+## Now: About us with address and map
 
 | Phase | Work | Done when |
 | --- | --- | --- |

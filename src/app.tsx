@@ -1,4 +1,5 @@
 import { FeedbackForm } from './components/FeedbackForm.js';
+import { Reviews } from './components/Reviews.js';
 import { readFeedback, saveFeedback, listFeedback } from './feedback.js';
 import { Hono } from 'hono';
 import { html } from 'hono/html';
@@ -55,6 +56,7 @@ export function createApp(db: ClinicDatabase, options: AppOptions = {}) {
   </>)));
   app.get('/styles.css', (c) => c.body(stylesheet, 200, { 'Content-Type': 'text/css; charset=UTF-8' }));
   app.get('/pico.css', (c) => c.body(picoStylesheet, 200, { 'Content-Type': 'text/css; charset=UTF-8' }));
+  app.get('/reviews', (c) => c.html(page(<Reviews />, 'Customer reviews — AgentClinic', 'reviews')));
   app.get('/feedback', (c) => c.html(page(<FeedbackForm feedback={listFeedback(db)} />, 'Feedback — AgentClinic', 'feedback')));
   app.get('/feedback/thanks', (c) => c.html(page(<>
     <h1>Thanks for the care!</h1><p>Your feedback has been saved. Our fictional clinic appreciates the check-in.</p>

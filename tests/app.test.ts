@@ -42,6 +42,7 @@ describe('GET /', () => {
       'href="/therapies"',
       'href="/dashboard"',
       'href="/feedback"',
+      'href="/reviews"',
     ]);
   });
 });

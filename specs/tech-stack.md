@@ -39,7 +39,7 @@ This baseline comes from package.json, TypeScript configuration, and the existin
 
 ## Simple demo defaults
 
-These defaults replace open-decision tasks. Keep the sample self-contained and preserve the existing stack. Feedback is implemented and validated in [the feedback feature](2026-10-15-feedback-form/validation.md); reviews and About remain planned.
+These defaults replace open-decision tasks. Keep the sample self-contained and preserve the existing stack. Feedback is implemented and validated in [the feedback feature](2026-10-15-feedback-form/validation.md); reviews are implemented and validated in [the reviews feature](2026-10-15-customer-reviews/validation.md); About remains planned.
 
 | Feature | Demo implementation |
 | --- | --- |
