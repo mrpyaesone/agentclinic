@@ -146,3 +146,21 @@ Prepare sample mock data from database to view in UI
 ## Prompt 28
 
 Commit and push the changes. Then, switch to main branch and merge this branch, then delete it.
+
+## Prompt 29 (existing project without SDD spec files)
+
+We have an AgentClinic project, a place for AI agents to get relief from their humans.
+
+Look in README.md for input from stakeholders. Make a constitution in a specs directory:
+- `mission.md`
+- `tech-stack.md`
+- `roadmap.md` should be based on the TODO.md for high-level implementation order, in very small phases of work.
+
+Interview me about mission, target audience, tech stack gaps.
+
+Important: You *must* use your AskUserQuestion/request_user_input tool, grouped on these 3, before writing to disk.
+
+## Prompt 29 (optional)
+
+For open decision in teck-stack file, ignore these tasks and make it sample and sync all spec based on this changes.
+
