@@ -8,11 +8,13 @@ Use the simple demo defaults in [tech-stack.md](tech-stack.md). Each numbered ph
 
 ## Now: feedback form
 
+Phases 1–5 are specified in [the feedback feature plan](2026-10-15-feedback-form/plan.md); implementation is not yet complete.
+
 | Phase | Work | Done when |
 | --- | --- | --- |
-| 1 | Add feedback storage. | A migration creates a table for messages and submission timestamps; a parameterized insert can save a sample message. |
-| 2 | Add the feedback page and navigation entry. | Visitors can find a labeled required message field with a 2,000-character limit; unfinished submission is not presented as operational. |
-| 3 | Implement submission and validation. | The server trims messages, rejects empty or oversized input with field errors, preserves safe input on validation failure, and stores valid messages in SQLite without publishing them. |
+| 1 | Add feedback storage. | A migration creates a table for name, email, message, rating, and submission timestamp; a parameterized insert can save sample feedback. |
+| 2 | Add the feedback page and navigation entry. | Visitors can find required Name, Email, Message (2,000-character limit), and Rating (1–5) fields; unfinished submission is not presented as operational. |
+| 3 | Implement submission and validation. | The server validates all four fields, rejects invalid input with field errors, preserves safe input on validation failure, and stores valid feedback privately in SQLite. |
 | 4 | Add submission outcomes. | Success shows confirmation; storage failure shows a useful retry message without exposing internal details. |
 | 5 | Verify the feedback journey. | Meaningful checks cover persistence, validation, and failures; keyboard and narrow-screen checks pass and existing journeys still work. |
 
