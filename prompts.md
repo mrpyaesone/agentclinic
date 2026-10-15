@@ -177,3 +177,7 @@ Create:
 Refer to specs/mission.md and specs/tech-stack.md for guidance.
 
 Important: You *must* use your request_user_input tool, grouped on these 3, before writing to disk.
+
+## Prompt 31
+
+Implement this plan.

@@ -39,12 +39,12 @@ This baseline comes from package.json, TypeScript configuration, and the existin
 
 ## Simple demo defaults
 
-These defaults replace open-decision tasks. Keep the sample self-contained and preserve the existing stack. They describe planned behavior, not features already implemented.
+These defaults replace open-decision tasks. Keep the sample self-contained and preserve the existing stack. Feedback is implemented and validated in [the feedback feature](2026-10-15-feedback-form/validation.md); reviews and About remain planned.
 
 | Feature | Demo implementation |
 | --- | --- |
 | Running the sample | Existing local Node.js server and SQLite database. |
-| Feedback | Required Name (text), Email (text), Message (textarea, trimmed and limited to 1–2,000 characters), and Rating (integer 1–5). Save these fields and a server submission timestamp in SQLite using a migration and parameterized insert. Show field errors, success confirmation, and a retry message on storage failure. Keep submissions private and collect sample contact details for this demo. See [feedback requirements](2026-10-15-feedback-form/requirements.md). |
+| Feedback | Required Name (text), Email (text), Message (textarea, trimmed and limited to 1–2,000 characters), and Rating (integer 1–5). Save these fields and a server submission timestamp in SQLite using a migration and parameterized insert. Show field errors, success confirmation, and a retry message on storage failure. Show all submitted names, messages, ratings, and submission dates on the feedback form page, newest first; keep email addresses private and collect sample contact details for this demo. See [feedback requirements](2026-10-15-feedback-form/requirements.md). |
 | Reviews | A small static collection of fictional agent names and review text, clearly labeled as sample reviews. No ratings, submission form, or moderation workflow. |
 | About and map | Short fictional clinic copy, the sample address “42 Context Lane, Promptville,” and a locally rendered static illustrative map labeled as fictional, with a text description. No map provider or API key. |
 | Browser experience | Semantic HTML, labeled fields, keyboard-accessible navigation, visible focus, and responsive styling. Check affected pages in a current modern browser at desktop and narrow widths. |

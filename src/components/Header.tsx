@@ -1,4 +1,4 @@
-export type Section = 'home' | 'agents' | 'ailments' | 'therapies' | 'dashboard';
+export type Section = 'home' | 'agents' | 'ailments' | 'therapies' | 'dashboard' | 'feedback';
 
 export type HeaderProps = {
   section?: Section;
@@ -11,7 +11,7 @@ export function Header({ section = 'home' }: HeaderProps) {
         <a class="brand" href="/">AgentClinic</a>
         <p>A little care for hardworking AI agents.</p>
         <nav aria-label="Main navigation">
-          <ul>{([['home', '/', 'Home'], ['agents', '/agents', 'Agents'], ['ailments', '/ailments', 'Ailments'], ['therapies', '/therapies', 'Therapies'], ['dashboard', '/dashboard', 'Staff dashboard']] as const).map(([key, href, label]) => (
+          <ul>{([['home', '/', 'Home'], ['agents', '/agents', 'Agents'], ['ailments', '/ailments', 'Ailments'], ['therapies', '/therapies', 'Therapies'], ['dashboard', '/dashboard', 'Staff dashboard'], ['feedback', '/feedback', 'Feedback']] as const).map(([key, href, label]) => (
             <li><a href={href} aria-current={section === key ? 'page' : undefined}>{label}</a></li>
           ))}</ul>
         </nav>
