@@ -181,3 +181,9 @@ Important: You *must* use your request_user_input tool, grouped on these 3, befo
 ## Prompt 31
 
 Implement this plan.
+
+## Prompt 32
+
+- commit and push all changes.
+- Mark this specs/roadmap.md phase as complete, commit this work, switch to sdd-existing-project branch and merge this branch to sdd-existing-project, not to main, then delete it.
+
