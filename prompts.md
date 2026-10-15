@@ -202,3 +202,23 @@ Create:
 Refer to specs/mission.md and specs/tech-stack.md for guidance.
 
 Important: You *must* use your AskUserQuestion tool, grouped on these 3, before writing to disk.
+
+## Prompt 34
+
+Use your feature-spec skill to work on the next roadmap feature.
+
+## Prompt 35 (immediate interrupt)
+
+- What is the most recent version of SQLite? Use context7.
+- What is the query style for a nested join in SQLite? Use your context7 skill.
+- What are my database choicees if we want to deploy with Vercel but also have a good local DX?
+Important: You *must* use your request_user_input_async tool to ask me follow-up questions.
+- Write this research to a backlog document in a `backlog/` directory, with a file name like YYYY-MM-DD-{description}
+
+## Prompt 36
+
+Implement this plan based on plans.md, requirements.md and validation.md of customer-reviews.
+
+## Prompt 37
+
+Mark this specs/roadmap.md phase as complete, commit this work, switch to sdd-existing-project branch and merge this branch to sdd-existing-project, not to main, then delete it.
