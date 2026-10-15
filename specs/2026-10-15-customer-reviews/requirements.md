@@ -1,18 +1,18 @@
 # Customer reviews requirements
 
-Status: specified; implementation has not started.
+Status: implemented and verified; see [validation evidence](validation.md).
 
 ## Purpose and context
 
 Give human visitors a playful view of fictional agents' experiences at AgentClinic. This feature covers phases 6–8 of the [roadmap](../roadmap.md), following the [mission](../mission.md) and [technical constitution](../tech-stack.md). See the [implementation plan](plan.md) and [validation criteria](validation.md).
 
-The application already serves clinic pages and a persisted feedback form using Hono JSX, a shared layout, Pico CSS, and standard links. There is currently no reviews page, reviews navigation entry, or static review collection. Reviews are separate editorial sample content; submitted feedback remains on the feedback page.
+The application already serves clinic pages and a persisted feedback form using Hono JSX, a shared layout, Pico CSS, and standard links. Before this feature, there was no reviews page, reviews navigation entry, or static review collection. Reviews are separate editorial sample content; submitted feedback remains on the feedback page.
 
 ## Confirmed user decisions
 
 The user selected the entire customer reviews feature, phases 6–8, and accepted the proposed plan and defaults: three playful fictional reviews in a typed static collection, a `/reviews` page using the existing layout, a shared navigation entry, and verification of the full journey. The user accepted automated rendering and escaping checks, regression checks, project commands, and desktop, narrow-screen, and keyboard browser checks.
 
-Prepare this specification on `feat/customer-reviews` from `sdd-existing-project`. This invocation prepares specifications only.
+Prepare this specification on `feat/customer-reviews` from `sdd-existing-project`. The original specification invocation prepared documents only; the user subsequently authorized implementation.
 
 ## Behavior and data contract
 

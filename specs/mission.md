@@ -32,7 +32,7 @@ The owner interview confirms a playful fictional clinic and SDD demo, human visi
 
 ## Scope and success
 
-Near-term work follows [TODO.md](../TODO.md): feedback first, customer reviews second, then an About page with an address and map. See [roadmap.md](roadmap.md) for the implementation sequence.
+Near-term work follows [TODO.md](../TODO.md): feedback and customer reviews are complete; the About page with an address and map is next. See [roadmap.md](roadmap.md) for the implementation sequence.
 
 Success means visitors can understand the premise, explore the existing clinic, and submit feedback with clear validation and confirmation; subsequent phases make reviews and clinic information easy to find. Each phase must meet its stated acceptance criteria without breaking existing journeys. Use qualitative acceptance criteria for this sample.
 
