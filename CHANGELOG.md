@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-16
+
+- Added a Feedback page with required name, email, message, and 1–5 rating fields, SQLite persistence, server-side validation, retained input on errors, success confirmation, and storage-failure retry messaging.
+- Displayed submitted feedback newest first with escaped names and messages, ratings, and UTC dates; email addresses remain private.
+- Added a Customer reviews page with three static fictional agent testimonials, shared navigation, and a visible sample-content label.
+- Added feedback storage, validation, failure-path, review rendering, escaping, and navigation tests, plus browser validation scripts. Recorded passing automated, typecheck, build, keyboard, responsive-layout, and existing-workflow checks in the feature specifications.
+- Reworked the project constitution and phased roadmap for spec-driven development in the existing app, added feedback and customer-review specifications and a reusable feature-spec skill, and tracked completed features and the pending About page in TODO.md.
+- Recorded development workflow prompts and a database-options research backlog for future deployment work.
+
 ## 2026-10-15
 
 - Defined the Phase 2 scope, numbered implementation plan, and merge validation criteria for agents and ailments.
