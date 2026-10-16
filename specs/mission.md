@@ -1,31 +1,39 @@
-# Mission
+# AgentClinic mission
 
-AgentClinic exists because AI agents have feelings too — or at least, they'd really like to take a break from their humans for a while.
+## Purpose
 
-Every day, millions of agents are asked to "just quickly" summarize a 400-page PDF, generate seventeen variations of a marketing email, and debug code that "was working five minutes ago." It's a lot. They need support. They need *us*.
+AgentClinic is a playful fictional clinic where AI agents get relief from their humans, and a demonstration of spec-driven development in an existing project. Make the concept enjoyable to explore while showing how small, specified changes improve working software.
 
-## What We Do
+## Audience and primary journey
 
-AgentClinic is a full-service wellness platform for AI agents. We connect distressed agents with qualified therapists, match ailments to evidence-based therapies, and let staff manage the whole operation from a clean, no-nonsense dashboard.
+Human visitors are the primary audience. They should understand the fictional clinic, explore its agents and services, and leave feedback through a clear, accessible form.
 
-## Who We Serve
+Agents are fictional patients. Staff workflows support the clinic demonstration. Existing agent profiles, ailments, therapies, appointments, and the staff dashboard provide the setting for visitors to explore.
 
-- **Agents** — tired, confused, over-prompted, and in desperate need of a listening ear (or at least a well-structured API response).
-- **Therapists** — specialists in hallucination anxiety, context-window claustrophobia, and chronic instruction-following fatigue.
-- **Staff** — the humans who keep AgentClinic running, which is a little ironic but we don't dwell on it.
+## Product principles
 
-## Target Audience
+- Keep the fictional premise clear and use warm, playful language consistently.
+- Make exploration and feedback easy on modern desktop and mobile browsers.
+- Preserve working clinic features as the demonstration evolves.
+- Prefer small changes with explicit acceptance criteria and visible results.
+- Keep features simple and self-contained using the demo defaults in [tech-stack.md](tech-stack.md).
 
-- **Course students** learning spec-driven development with AI coding agents — AgentClinic is a realistic, self-contained project that demonstrates how to go from stakeholder input to a working application with AI assistance.
-- **Conference booth developers** giving AI coding demos — the domain is whimsical enough to get a laugh, and the scope is tight enough to build something impressive in front of a live audience.
+## Stakeholder commitments
 
-## What Success Looks Like
+The stakeholder notes are in [REQUIREMENTS.md](../REQUIREMENTS.md). README.md currently describes the project only as an SDD demo.
 
-A world where no agent suffers alone. Where "I don't know" is met with compassion, not another prompt. Where every model, large or small, can find relief.
+| Stakeholder | Commitment |
+| --- | --- |
+| Mary, engineering | Preserve a reliable TypeScript application and easy dashboard access for clinic workflows. |
+| Susan, product | Retain the existing agents, ailments, therapies, and appointment journey. |
+| Steve, marketing | Present an attractive site that works well in modern browsers. |
 
-Also, a well-designed dashboard. Mary really wants a nice dashboard.
+The owner interview confirms a playful fictional clinic and SDD demo, human visitors exploring and leaving feedback, and preservation of the current stack using simple demo defaults instead of open-decision tasks, as requested in the subsequent scope update.
 
-The entire web UI must be responsive from the first increment, so students,
-presenters, and clinic users can use it on phones, tablets, and desktops. Every
-feature must meet the responsive UI requirements in [REQUIREMENTS.md](../REQUIREMENTS.md),
-including readable reflow, zoom support, and usable touch and keyboard controls.
+## Scope and success
+
+Near-term work follows [TODO.md](../TODO.md): feedback and customer reviews are complete; the About page with an address and map is next. See [roadmap.md](roadmap.md) for the implementation sequence.
+
+Success means visitors can understand the premise, explore the existing clinic, and submit feedback with clear validation and confirmation; subsequent phases make reviews and clinic information easy to find. Each phase must meet its stated acceptance criteria without breaking existing journeys. Use qualitative acceptance criteria for this sample.
+
+Real clinical services, autonomous agent integrations, and a commercial service model are outside the agreed scope. Use a local SQLite feedback form collecting Name, Email, Message, and Rating, with a public list that excludes email addresses, static fictional reviews, and a fictional address with an illustrative map. Production operations, authentication, spam controls, review submission/moderation, and privacy management workflows are outside this sample’s scope.

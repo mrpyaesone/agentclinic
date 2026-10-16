@@ -1,80 +1,41 @@
-# Roadmap
+# AgentClinic roadmap
 
-Phases are intentionally small — each one is a shippable slice of work, independently reviewable and testable.
+## Ordering and delivery rules
 
-Responsive design is required in every phase, rather than deferred to polish.
-Every page must satisfy the [product UI requirements](../REQUIREMENTS.md) with
-feature-specific acceptance criteria and browser checks for phones, tablets,
-desktops, landscape orientation, and zoom.
+Follow [TODO.md](../TODO.md): **Done — feedback form and customer reviews; Now — About us with address and map.** Existing agents, ailments, therapies, booking, and dashboard features are the baseline; they do not need rebuilding.
 
----
+Use the simple demo defaults in [tech-stack.md](tech-stack.md). Each numbered phase is a small, independently reviewable change. Complete its acceptance criteria before proceeding. There are no open-decision or production-readiness tasks. Completion status is recorded per feature below.
 
-MVP implementation for phases 1–7 is now present. See the
-[MVP verification](2026-10-15-mvp/verification.md) for passing automated, runtime,
-and browser checks. Comprehensive human visual signoff remains pending before
-merge; implementation status does not assert that this prerequisite is complete.
+## Done: feedback form
 
-## Phase 1 — Hello Hono (complete)
+Phases 1–5 are complete. See [the feedback feature plan](2026-10-15-feedback-form/plan.md) and [validation evidence](2026-10-15-feedback-form/validation.md).
 
-- [x] Install and configure Hono with `tsx` dev server
-- [x] Single `/` page route returning "AgentClinic is open for business"
-- [x] Confirm TypeScript types work end-to-end
-- [x] Validate the home page, layout, CSS delivery, and port configuration with Vitest acceptance tests
+| Phase | Status | Work | Done when |
+| --- | --- | --- | --- |
+| 1 | Complete | Add feedback storage. | A migration creates a table for name, email, message, rating, and submission timestamp; a parameterized insert can save sample feedback. |
+| 2 | Complete | Add the feedback page and navigation entry. | Visitors can find required Name, Email, Message (2,000-character limit), and Rating (1–5) fields; unfinished submission is not presented as operational. |
+| 3 | Complete | Implement submission and validation. | The server validates all four fields, rejects invalid input with field errors, preserves safe input on validation failure, and stores valid feedback in SQLite and displays all submissions on the feedback page with email addresses excluded. |
+| 4 | Complete | Add submission outcomes. | Success shows confirmation; storage failure shows a useful retry message without exposing internal details. |
+| 5 | Complete | Verify the feedback journey. | Meaningful checks cover persistence, validation, and failures; keyboard and narrow-screen checks pass and existing journeys still work. |
 
-Completed on 2026-10-14, including the requested shared header/main/footer
-layout and linked CSS extension. See the [implementation verification](2026-10-14-hello-hono/verification.md).
+## Done: customer reviews
 
-## Phase 2 — Base Layout, Agents & Ailments
+Phases 6–8 are complete. See the [plan](2026-10-15-customer-reviews/plan.md) and [validation evidence](2026-10-15-customer-reviews/validation.md).
 
-### Base Layout
+| Phase | Status | Work | Done when |
+| --- | --- | --- | --- |
+| 6 | Complete | Add sample review content. | A small static collection contains fictional agent names and review text, without a new database table. |
+| 7 | Complete | Display reviews and add navigation. | Visitors can find and read reviews in the shared layout, clearly labeled as fictional samples. |
+| 8 | Complete | Verify review presentation. | Content renders safely and reads well on desktop and narrow screens; navigation works by keyboard. |
 
-The shared header/main/footer layout and basic CSS were brought forward into
-Phase 1. Navigation, Pico CSS, agent data, profiles, and ailment integration were
-implemented in Phase 2; MVP work extends navigation and addresses its review findings.
+## Now: About us with address and map
 
-- Server-side JSX layout component (header, nav, main, footer)
-- Basic CSS (custom properties, reset, typography)
-- All routes render inside the shared layout
+| Phase | Work | Done when |
+| --- | --- | --- |
+| 9 | Add the About page and navigation entry. | Visitors can read the playful clinic story and “42 Context Lane, Promptville,” clearly presented as a fictional address. |
+| 10 | Add an illustrative map. | A locally rendered static map identifies the fictional clinic, includes a text description, and needs no external service or API key. |
+| 11 | Verify the About journey. | The story, address, and map are discoverable and readable on desktop and narrow screens, with keyboard-accessible navigation. |
 
-### Agent List
-- SQLite database + first migration (`agents` table)
-- Seed a handful of fictional agents
-- `/agents` page listing all agents
+## Completion discipline
 
-### Agent Detail
-- `/agents/:id` page showing a single agent's profile
-- Name, model type, current status, presenting complaints
-
-### Ailments Catalog
-- `ailments` table + seed data (e.g., "context-window claustrophobia", "prompt fatigue")
-- `/ailments` list page
-- Link agents to one or more ailments
-
-## Phase 3 — Therapies Catalog
-- `therapies` table + seed data
-- `/therapies` list page
-- Map ailments → recommended therapies
-
-## Phase 4 — Appointment Booking
-- `appointments` table (agent, therapist, datetime, status)
-- Form to book an appointment from an agent's detail page
-- Basic validation and confirmation page
-
-## Phase 5 — Staff Dashboard
-- `/dashboard` with summary counts: agents, open appointments, ailments in-flight
-- Simple table views for staff to manage records
-- Mary's dashboard is now real
-
-## Phase 6 — Polish & Accessibility
-- Audit and refine responsive behavior across all previously implemented pages
-- Semantic HTML audit
-- Keyboard navigation and focus styles
-
-## Phase 7 — Hardening
-- Error pages (404, 500)
-- Input sanitization on all forms
-- Basic logging middleware
-
----
-
-Later phases (not yet planned): auth, email notifications, therapist profiles, reporting.
+For each implemented phase, record acceptance evidence in the change description or feature specification. Run verification appropriate to the change; code changes should pass tests, typechecking, and build. Update TODO.md as features actually finish. Keep all three constitution documents aligned with the sample scope and existing stack.

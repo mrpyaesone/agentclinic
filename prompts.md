@@ -146,3 +146,79 @@ Prepare sample mock data from database to view in UI
 ## Prompt 28
 
 Commit and push the changes. Then, switch to main branch and merge this branch, then delete it.
+
+## Prompt 29 (existing project without SDD spec files)
+
+We have an AgentClinic project, a place for AI agents to get relief from their humans.
+
+Look in README.md for input from stakeholders. Make a constitution in a specs directory:
+- `mission.md`
+- `tech-stack.md`
+- `roadmap.md` should be based on the TODO.md for high-level implementation order, in very small phases of work.
+
+Interview me about mission, target audience, tech stack gaps.
+
+Important: You *must* use your AskUserQuestion/request_user_input tool, grouped on these 3, before writing to disk.
+
+## Prompt 29 (optional)
+
+For open decision in teck-stack file, ignore these tasks and make it sample and sync all spec based on this changes.
+
+## Prompt 30
+
+Find the next phase on specs/roadmap.md and make a branch, ask me about the feature spec.
+Create:
+ - A new directory YYYY-MM-DD-feature-name under specs for this feature work
+ - In there:
+  - `plan.md` as a series of numbered task groups.
+  - `requirements.md` for the scope, decisions, context
+  - `validation.md` for how to know the implementation succeeded and can be merged
+
+Refer to specs/mission.md and specs/tech-stack.md for guidance.
+
+Important: You *must* use your request_user_input tool, grouped on these 3, before writing to disk.
+
+## Prompt 31
+
+Implement this plan.
+
+## Prompt 32
+
+- commit and push all changes.
+- Mark this specs/roadmap.md phase as complete, commit this work, switch to sdd-existing-project branch and merge this branch to sdd-existing-project, not to main, then delete it.
+
+## Prompt 33
+
+I want to stop repeating the feature spec prompt. Use your skill creator to help me write a "feature spec" local skill. Here is the previous prompt:
+
+Find the next phase on specs/roadmap.md and make a branch, ask me about the feature spec.
+Create:
+ - A new directory YYYY-MM-DD-feature-name under specs for this feature work
+ - In there:
+  - `plan.md` as a series of numbered task groups.
+  - `requirements.md` for the scope, decisions, context
+  - `validation.md` for how to know the implementation succeeded and can be merged
+
+Refer to specs/mission.md and specs/tech-stack.md for guidance.
+
+Important: You *must* use your AskUserQuestion tool, grouped on these 3, before writing to disk.
+
+## Prompt 34
+
+Use your feature-spec skill to work on the next roadmap feature.
+
+## Prompt 35 (immediate interrupt)
+
+- What is the most recent version of SQLite? Use context7.
+- What is the query style for a nested join in SQLite? Use your context7 skill.
+- What are my database choicees if we want to deploy with Vercel but also have a good local DX?
+Important: You *must* use your request_user_input_async tool to ask me follow-up questions.
+- Write this research to a backlog document in a `backlog/` directory, with a file name like YYYY-MM-DD-{description}
+
+## Prompt 36
+
+Implement this plan based on plans.md, requirements.md and validation.md of customer-reviews.
+
+## Prompt 37
+
+Mark this specs/roadmap.md phase as complete, commit this work, switch to sdd-existing-project branch and merge this branch to sdd-existing-project, not to main, then delete it.

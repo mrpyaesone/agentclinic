@@ -1,3 +1,6 @@
+import { FeedbackForm } from './components/FeedbackForm.js';
+import { Reviews } from './components/Reviews.js';
+import { readFeedback, saveFeedback, listFeedback } from './feedback.js';
 import { Hono } from 'hono';
 import { html } from 'hono/html';
 import type { Child } from 'hono/jsx';
@@ -53,6 +56,27 @@ export function createApp(db: ClinicDatabase, options: AppOptions = {}) {
   </>)));
   app.get('/styles.css', (c) => c.body(stylesheet, 200, { 'Content-Type': 'text/css; charset=UTF-8' }));
   app.get('/pico.css', (c) => c.body(picoStylesheet, 200, { 'Content-Type': 'text/css; charset=UTF-8' }));
+  app.get('/reviews', (c) => c.html(page(<Reviews />, 'Customer reviews — AgentClinic', 'reviews')));
+  app.get('/feedback', (c) => c.html(page(<FeedbackForm feedback={listFeedback(db)} />, 'Feedback — AgentClinic', 'feedback')));
+  app.get('/feedback/thanks', (c) => c.html(page(<>
+    <h1>Thanks for the care!</h1><p>Your feedback has been saved. Our fictional clinic appreciates the check-in.</p>
+    <p><a href="/feedback">View visitor feedback</a></p>
+    <p><a href="/">Back to the clinic</a></p>
+  </>, 'Thank you — AgentClinic', 'feedback')));
+  app.post('/feedback', async (c) => {
+    const { values, errors, status } = await readFeedback(c.req.raw);
+    const form = () => page(<FeedbackForm values={values} errors={errors} feedback={listFeedback(db)} />, 'Check your feedback — AgentClinic', 'feedback');
+    if (Object.keys(errors).length) return c.html(form(), status);
+    try {
+      saveFeedback(db, { name: values.name.trim(), email: values.email.trim(), message: values.message.trim(),
+        rating: Number(values.rating), createdAt: now() });
+    } catch {
+      logError({ event: 'feedback_save_failed', method: 'POST', path: '/feedback', error: 'StorageFailure' });
+      errors.form = 'We could not save your feedback. Please try again.';
+      return c.html(form(), 503);
+    }
+    return c.redirect('/feedback/thanks', 303);
+  });
   app.get('/agents', (c) => {
     const agents = listAgents(db);
     return c.html(page(<><h1>Agents</h1><p>A little support for every model.</p>

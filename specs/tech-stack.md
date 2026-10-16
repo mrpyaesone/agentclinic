@@ -1,72 +1,52 @@
-# Tech Stack
+# AgentClinic technical constitution
 
-AgentClinic is a server-side TypeScript application. All rendering happens on the server; the browser receives plain HTML that works well and looks good.
+## Stack decision
 
-The web UI uses responsive design on every page from its first implementation.
-Follow the product's [responsive UI requirements](../REQUIREMENTS.md).
+Preserve the existing stack. Extend established patterns and use existing dependencies where practical. Any proposed stack change needs an explicit rationale and an updated specification before implementation.
 
-## Core
+## Current baseline
 
-| Layer | Choice | Rationale |
-|---|---|---|
-| Language | TypeScript | Type safety end-to-end; satisfies Mary's requirement |
-| Runtime | Node.js | Stable, well-supported, vast ecosystem |
-| Server framework | **Hono** | Lightweight, TypeScript-first, fast, excellent DX; routes and middleware feel natural |
-| Templating | Hono JSX (server-side) | JSX without React overhead; components are just functions |
-| CSS | Pico CSS v2 + plain CSS custom-property overrides | Semantic HTML styling with locally served CSS and no CSS compilation step |
+This baseline comes from package.json, TypeScript configuration, and the existing source; versions describe repository declarations, not claims about the latest releases.
 
-## Styling
+| Area | Existing choice |
+| --- | --- |
+| Runtime | Node.js 24 (`>=24 <25`), npm, ES modules |
+| Language | TypeScript `~5.9.3`, strict checking, NodeNext modules |
+| HTTP server | Hono `^4.13.13` with `@hono/node-server` `^2.1.5` |
+| Rendering | Server-rendered HTML using Hono JSX; standard links and HTML forms |
+| Styling | Pico CSS `^2.1.1` and application CSS |
+| Storage | SQLite through better-sqlite3 `^13.0.3` |
+| Schema management | Ordered SQL migrations and explicit migration/seed commands |
+| Development | tsx watch |
+| Verification | Vitest `^5.0.4`, TypeScript typechecking, build, and an existing browser validation script |
 
-- Starting in Phase 2, use the standard Pico CSS v2 distribution from
-  `@picocss/pico`, with the selected version recorded in the lockfile. See the
-  [official documentation](https://picocss.com/docs).
-- Serve Pico locally at `/pico.css` before application overrides at `/styles.css`;
-  include both assets in production output. Avoid runtime CDN dependencies.
-- Use semantic HTML and Pico layout conventions, with a consistent light theme.
-  Keep custom CSS small and focused on branding and required responsive/accessibility
-  behavior. Pico supplies base reset, typography, and component styling.
-- No Sass, CSS bundler, or browser JavaScript is required. Phase 1’s plain CSS
-  remains historical; Phase 2 adopts Pico for the shared layout and every page.
+## Implementation rules
 
-## Responsive UI
+- Keep new pages and forms consistent with the existing server-rendered architecture, layout, and navigation.
+- Validate submitted values on the server, escape rendered visitor content, and preserve existing same-origin form protections.
+- For approved database changes, add migrations and use parameterized queries. Do not silently change existing data contracts.
+- Keep deployment configuration external: the application currently reads `PORT` and `DATABASE_PATH`, with SQLite defaulting to `./data/agentclinic.sqlite`.
+- Preserve explicit database migration before server startup and the existing structured request/error logging approach.
+- Use meaningful verification for changed behavior, including validation and failure paths for forms and data writes. Check affected pages in modern browsers for readability, keyboard access, and responsive layout.
 
-- Use mobile-first plain CSS with fluid containers, flexible layouts, relative spacing, and adaptive typography. Add media queries when content requires a different arrangement.
-- Include viewport metadata without disabling zoom. Wrap long content, allow flex/grid children to shrink, and keep wide tables within their own scrolling region.
-- Validate at 320, 375, 768, 1280, and 1440 CSS pixels, phone landscape, and 200% browser zoom. No page-level horizontal overflow or overlap is acceptable.
-- Keep interactive targets at least 44 by 44 CSS pixels with visible keyboard focus. Core content must work without client-side JavaScript.
-- Require responsive acceptance criteria in every feature spec. Vitest covers behavior and markup; browser checks establish actual reflow and visual usability.
+## Verification commands
 
-## Recommended: Hono
+- `npm test` runs the automated suite.
+- `npm run typecheck` checks application and test types.
+- `npm run build` compiles the application and copies assets.
+- `npm run dev` starts the development server.
+- `npm run db:migrate` and `npm run db:seed` manage local database setup; production commands operate on compiled files.
 
-[Hono](https://hono.dev) is chosen over Express/Fastify because:
+## Simple demo defaults
 
-- First-class TypeScript with zero config
-- Built-in JSX renderer for server-side HTML
-- Middleware model is simple and composable
-- Runs on Node, Deno, Bun, and edge runtimes without changes
+These defaults replace open-decision tasks. Keep the sample self-contained and preserve the existing stack. Feedback is implemented and validated in [the feedback feature](2026-10-15-feedback-form/validation.md); reviews are implemented and validated in [the reviews feature](2026-10-15-customer-reviews/validation.md); About remains planned.
 
-## Data
+| Feature | Demo implementation |
+| --- | --- |
+| Running the sample | Existing local Node.js server and SQLite database. |
+| Feedback | Required Name (text), Email (text), Message (textarea, trimmed and limited to 1–2,000 characters), and Rating (integer 1–5). Save these fields and a server submission timestamp in SQLite using a migration and parameterized insert. Show field errors, success confirmation, and a retry message on storage failure. Show all submitted names, messages, ratings, and submission dates on the feedback form page, newest first; keep email addresses private and collect sample contact details for this demo. See [feedback requirements](2026-10-15-feedback-form/requirements.md). |
+| Reviews | A small static collection of fictional agent names and review text, clearly labeled as sample reviews. No ratings, submission form, or moderation workflow. |
+| About and map | Short fictional clinic copy, the sample address “42 Context Lane, Promptville,” and a locally rendered static illustrative map labeled as fictional, with a text description. No map provider or API key. |
+| Browser experience | Semantic HTML, labeled fields, keyboard-accessible navigation, visible focus, and responsive styling. Check affected pages in a current modern browser at desktop and narrow widths. |
 
-- **SQLite** (via `better-sqlite3`) for local development and early production — simple, embedded, no infrastructure
-- Migrations via plain SQL files; no ORM to start
-
-## Testing
-
-- **Vitest** — use automated TypeScript tests to validate application behavior and feature acceptance criteria.
-- Run `npm test` (`vitest run`) for a single validation run locally and in CI. Tests use `.test.ts` or `.test.tsx` filenames.
-- Test Hono routes through the application's request API without opening a listening socket; cover expected responses and meaningful error cases.
-- Require `npm test`, `npm run typecheck`, and `npm run build` before merging. Vitest execution does not replace strict TypeScript checking.
-- Keep manual browser checks for visual readability, responsive layouts, and accessibility alongside automated tests.
-- Use Vitest for current Phase 1 validation and subsequent work. Earlier manual-check results remain historical evidence.
-
-## Tooling
-
-- `tsx` for development (run TypeScript directly, no build step needed)
-- `tsc` for production builds
-- `prettier` for formatting
-
-## What We Are Not Using
-
-- No React, Vue, or Svelte — server-side rendering keeps the stack simple
-- No ORM — SQL is sufficient at this scale
-- No Docker — not yet; that's a later phase concern
+Production hosting, backups, authentication, spam protection, privacy management workflows, and external integrations are excluded from implementation tasks. Preserve existing validation and form protections.
