@@ -40,6 +40,6 @@
     "@hono/node-server": "^2.1.5",
     "@picocss/pico": "^2.1.1",
     "better-sqlite3": "^13.0.3",
-    "hono": "^4.13.13"
+    "hono": "^4.13.18"
   }
 }
